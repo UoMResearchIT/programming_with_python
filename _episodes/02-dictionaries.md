@@ -10,65 +10,83 @@ keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
 
-Previously we learned about sequence objects such as: string, list, tuple. Now we are going to learn about a new object which implements the notion of hash table.
+In previous lessons we have learnt about lists and numpy multi-dimensional arrays, which are designed for working with structured, tabular, datasets. But much of the data that we use in our day to day lives, such as that in data catalogs or the communications between modern digital services, does not fit nicely into these tabular datasets. Instead unstructured data formats, which use labels or 'keys' to identify each data object are needed. One of the most common formats for such data is the [JavaScript Object Notation (JSON)](https://en.wikipedia.org/wiki/JSON) file format. This format was originally developed to fulfil the need for a self-contained, flexible format for real-time server-to-browser communication, and is now used as the basis for many unstructured data formats.
 
-Why do we need this new object?
+One example of such usage in research is the storage of metadata for data, programs, workflows, or any other such object in a [Research Object Crate (RO-Crate)](https://www.researchobject.org/ro-crate/). These metadata records take the form:
+~~~
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "mainEntity": {
+        "@id": "tracking_workflow.ga"
+      },
+      "hasPart": [
+        {
+          "@id": "tracking_workflow.ga"
+        },
+        {
+          "@id": "object_tracking_pipeline.png"
+        }
+      ],
+      "author": [
 
-Sequences are a great tool but they have one big limitation. The execution time to find one specific value inside is linear, as can be shown by fruitless searches for the string `x` within increasingly long lists of integers.
+      ],
+      "provider": [
+        {
+          "@id": "#project-1"
+        }
+      ],
+      "license": "Apache-2.0",
+      "sdPublisher": {
+        "@id": "#person-1"
+      },
+      "sdDatePublished": "2021-01-01 00:00:00 +0000"
+    },
+    {
+      "@id": "#galaxy",
+      "@type": "ComputerLanguage",
+      "name": "Galaxy",
+      "identifier": {
+        "@id": "https://galaxyproject.org/"
+      },
+      "url": {
+        "@id": "https://galaxyproject.org/"
+      }
+    },
+    {
+      "@id": "#project-1",
+      "@type": "Organization",
+      "name": "Science Workflows",
+    },
+    {
+      "@id": "#person-1",
+      "@type": "Person",
+      "name": "Alice Smith",
+    }
+  ]
+}
 ~~~
-short_list = list(range(100_000))
-long_list = list(range(1_000_000))
-~~~
-{: .language-python}
+{: .language-json}
 
-We use the built-in `%timeit` function, to test the speed of these searches:
-~~~
-%timeit -n100 'x' in short_list
-~~~
-{: .language-python}
-~~~
-2.02 ms ± 529 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
-~~~
-{: .output}
+The layout of this object is organised using `key`:`value` pairs, where the `key` is a unique string, and the `value` can be any data type, including other data structures. This simple layout allows quite complex data objects to be constructed.
 
-~~~
-%timeit -n100 'x' in long_list
-~~~
-{: .language-python}
-~~~
-17.4 ms ± 1.35 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
-~~~
-{: .output}
-
-Note that the increase in search time is (very roughly) linear.
-
-This is a real problem because the membership test is a very useful and common procedure. So we would like to have something which is not dependent of the number of elements.
-
-### Another limitation
-
-We would like, for example to associate a key to an element like here the name alice with the age 35. We cannot do that with a list or any other sequence object.
-
-We will get an error if we try:
-~~~
-t = []
-t['alice'] = 35
-~~~
-{: .language-python}
-
-~~~
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-<ipython-input-28-bea9bcd2acd4> in <module>
-      1 t = []
-----> 2 t['alice'] = 35
-
-TypeError: list indices must be integers or slices, not str
-~~~
-{: .output}
-
-The hash table structure is the answer to these two limitations and in python it is implemented by the 'dictionary' object.
 
 ## Dictionary
+
+In python this structure is implemented using the 'dictionary' object. Below we will go through the principles of creating and working with these objects. Then we will introduce a library for working with JSON files.
 
 ### Creation
 
@@ -281,6 +299,148 @@ Instead we would have to use the `values` method to search these:
 True
 ~~~
 {: .output}
+
+
+## JSON files
+
+Because JSON files are such an intrinsic part of the internet, python has a built in package for supporting the reading of these. This is loaded using:
+~~~
+import glob
+import json
+
+filenames = sorted(glob.glob('*.json'))
+
+jobjects = {}
+for filename in filenames:
+    with open(filename) as f:
+        jobjects[filename] = json.loads(f.read())
+~~~
+{: .language-python}
+
+The `f.load` function reads the file as a single string, which the `json.loads()` function then turns into a dictionary, following the `json` standard.
+
+
+
+## HTTP requests
+
+Although lot of information is available on the internet for general use, without automated tools for accessing this data it is difficult to make full use of it. Python has a number of libraries for making HTTP requests, to help with this automation, of which the `requests` library is the most commonly used. This library provides a streamlined application process interface (API) for carrying out these tasks, and has built in JSON support, for easy digesting of the retrieved data.
+
+The basic interaction for making a HTTP request is:
+~~~
+import requests
+
+source_url='https://api.datacite.org/dois/10.48546/workflowhub.workflow.56.1'
+requests.get(source_url)
+~~~
+{: .language-python}
+~~~
+<Response [200]>
+~~~
+{: .output}
+The HTTP request returns a response code - a value of 200 indicates the request was successful. There are a wide range of [possible response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes). Those starting as 2XX generally indicate success, whereas those starting with 4XX indicate a failure of some sort (including the most common: `404 Not Found`).
+
+The HTTP request we made returned more than just the response code, there will also be the attached content that we requested. In this case our request was made to an API which returns citation information associated with the DOI `10.48546/workflowhub.workflow.56.1`.
+Rather than being presented as a complex webpage, this information is returned as a machine-readable string, similar to the JSON file we read earlier, so we can read this in a similar manner:
+~~~
+response = requests.get(source_url)
+record = response.json()
+~~~
+{: .language-python}
+
+Once the data is in a dictionary we can start exploring it - first step is to check the keys available:
+~~~
+record.keys()
+~~~
+{: .language-python}
+~~~
+dict_keys(['data'])
+~~~
+{: .output}
+The upper level of the dictionary is simply data - so we can move to the second level:
+~~~
+record['data'].keys()
+~~~
+{: .language-python}
+~~~
+dict_keys(['id', 'type', 'attributes', 'relationships'])
+~~~
+{: .output}
+
+The `id` contains the DOI that we used to find this entry, while the `attributes` contains the metadata for the object referred to by the DOI. By digging further into the dictionary we can extract information about the object.
+
+> ## Find the title
+> What is the path to find the title of the object?
+> > ## solution
+> > ~~~
+> > record['data']['attributes']['titles'][0]['title']
+> > ~~~
+> > {: .language-python}
+> >
+> {: .solution}
+{: .challenge}
+
+> ## Find the title (part 2)
+> Assuming that all JSON objects returned by this API follow the same layout as this
+> record, write a simple function that will return the title of any DOI it is given.
+>
+> Test that your function works using the DOI: `10.5281/zenodo.4416028`
+> > ## solution
+> > ~~~
+> > def doi_title( doi_string ):
+> >     source_url = 'https://api.datacite.org/dois/{}'.format(doi_string)
+> >     response = requests.get(source_url)
+> >     record = response.json()
+> >     return(record['data']['attributes']['titles'][0]['title'])
+> > ~~~
+> > {: .language-python}
+> > Testing the function:
+> > ~~~
+> > doi_title('10.5281/zenodo.4416028')
+> > ~~~
+> > {: .language-python}
+> > ~~~
+> > 'Britain Breathing 2016-2019 Air Quality and Meteorological Dataset'
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+
+
+
+
+# Speed Tests...
+
+Sequences are a great tool but they have one big limitation. The execution time to find one specific value inside is linear, as can be shown by fruitless searches for the string `x` within increasingly long lists of integers.
+~~~
+short_list = list(range(100_000))
+long_list = list(range(1_000_000))
+~~~
+{: .language-python}
+
+We use the built-in `%timeit` function, to test the speed of these searches:
+~~~
+%timeit -n100 'x' in short_list
+~~~
+{: .language-python}
+~~~
+2.02 ms ± 529 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+~~~
+{: .output}
+
+~~~
+%timeit -n100 'x' in long_list
+~~~
+{: .language-python}
+~~~
+17.4 ms ± 1.35 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
+~~~
+{: .output}
+
+Note that the increase in search time is (very roughly) linear.
+
+This is a real problem because the membership test is a very useful and common procedure. So we would like to have something which is not dependent of the number of elements.
+
 
 > ## Testing access time for large dictionaries
 > Please create two dictionaries, one with 100,000 key:value pairs, the other with
