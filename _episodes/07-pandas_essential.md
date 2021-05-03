@@ -3,7 +3,7 @@ title: "Pandas Essential"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "Ho can I work with spreadsheet style datasets?"
 objectives:
 - "First learning objective. (FIXME)"
 keypoints:
@@ -134,8 +134,35 @@ country_list = ['Albania','Belgium']
 print(data.loc[country_list, year_list])
 ~~~
 {: .language-python}
+~~~
+         gdpPercap_1952  gdpPercap_1967  gdpPercap_1982  gdpPercap_1997
+country
+Albania     1601.056136     2760.196931     3630.880722     3193.054604
+Belgium     8343.105127    13149.041190    20979.845890    27561.196630
+~~~
+{: .output}
+
+
 
 ## Masking data
+
+Pandas data arrays are based on numpy arrays, and retain some of the numpy tools, such as masked arrays. This enables us to apply selection criteria to the datasets, so that only the values that we require are shown. For example, this selects all data where the GDP is above $10,000:
+~~~
+subset = data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972']
+print(subset[subset>10000])
+~~~
+{: .language-python}
+~~~
+             gdpPercap_1962  gdpPercap_1967  gdpPercap_1972
+country
+Italy                   NaN     10022.40131     12269.27378
+Montenegro              NaN             NaN             NaN
+Netherlands     12790.84956     15363.25136     18794.74567
+Norway          13450.40151     16361.87647     18965.05551
+Poland                  NaN             NaN             NaN
+~~~
+{: .output}
+
 
 
 ## Plotting from Pandas
@@ -146,6 +173,7 @@ data.loc['Sweden',:].plot()
 plt.xticks(rotation=90)
 ~~~
 {: .language-python}
+![Line plot of increase in Sweden's GDP from 1952 to 2002, with no axis labels, and awkward x-axis tick labels.](../fig/sweden-pandas-fig1.png)
 Note that we've had to rotate the xtick labels by 90 degrees, because they do not fit neatly under the x-axis. Later we will clean these up properly.
 
 Note that, in the case above, we passed a single column of data to the `plot` method - which it automatically transposed in order to make sense of the plot request (because this method usually works on rows of data). If you want to plot more than one column of data you will need to explicitly transpose the DataFrame yourself.
@@ -155,6 +183,24 @@ For example, we will transpose the GDP data for the first 3 countries in our dat
 print(data.iloc[0:3,:].T)
 ~~~
 {: .language-python}
+~~~
+country             Albania       Austria       Belgium
+gdpPercap_1952  1601.056136   6137.076492   8343.105127
+gdpPercap_1957  1942.284244   8842.598030   9714.960623
+gdpPercap_1962  2312.888958  10750.721110  10991.206760
+gdpPercap_1967  2760.196931  12834.602400  13149.041190
+gdpPercap_1972  3313.422188  16661.625600  16672.143560
+gdpPercap_1977  3533.003910  19749.422300  19117.974480
+gdpPercap_1982  3630.880722  21597.083620  20979.845890
+gdpPercap_1987  3738.932735  23687.826070  22525.563080
+gdpPercap_1992  2497.437901  27042.018680  25575.570690
+gdpPercap_1997  3193.054604  29095.920660  27561.196630
+gdpPercap_2002  4604.211737  32417.607690  30485.883750
+gdpPercap_2007  5937.029526  36126.492700  33692.605080
+~~~
+{: .output}
+
+
 This data is now ready to be plotted as a histogram - first we set the style of the plot to match that of the ggplot package in R:
 ~~~
 plt.style.use('ggplot')
@@ -163,6 +209,29 @@ plt.xticks(rotation=90)
 plt.ylabel('GDP per capita')
 ~~~
 {: .language-python}
+![Bar chart showing the increase in GDP for Albania, Austria, and Belgium from 1952 to 2007.](../fig/albania_austria_belgium_bar_chart.png)
+
+
+> ## Saving figures created by pandas
+> Some python interpreters will, when creating a figure, present you with a graphical
+> interface that you can use to save the figure. If, however, your interface does not do
+> this (or you are writing a script which will automatically generate and save the
+> figures), then you will first need to define a matplotlib figure object, and ensure that
+> pandas plots your figure inside this.
+>
+> To do this create a matplotlib subplots object, with handles for the figure (`fig`) and
+> axis (`axs`) objects. Pass the axis object to pandas when plotting your figure
+> (`ax=axs`), then use the figure object at the end to save the figure (`fig.savefig`).
+> ~~~
+> fig, axs = plt.subplots()
+> data.loc['Albania':'Belgium',:].T.plot(kind='bar',ax=axs)
+> plt.xticks(rotation=90)
+> plt.ylabel('GDP per capita')
+> fig.savefig('albania-austria-belgium_GDP.png', bbox_inches='tight')
+> ~~~
+> {: .language-python}
+{: .callout}
+
 
 > ## Changing Column Labels
 > Note that the x-tick labels have been taken directly from the index values of the transposed DataFrame (which were the original column labels). These don't really need to be more than the year of the GDP values, so we could change the column labels to reflect this.

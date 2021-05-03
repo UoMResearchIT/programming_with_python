@@ -3,11 +3,21 @@ title: "Software Package Management"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How can I load new python libraries?"
+- "How can I deal with libraries which have competing software requirements"
+- "How can I record the python libraries that I use for my work?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn how to install a conda package"
+- "Learn how to use different conda channels"
+- "Learn how to create a new conda environment"
+- "Learn how to activate / deactivate conda environments"
+- "Learn how to record the setup of a conda environment"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "`conda install`"
+- "`conda env create`"
+- "`conda activate`"
+- "`conda deactivate`"
+- "`conda save`"
 ---
 
 Virtual environments are a useful tool for isolating and managing the software packages you use. Doing this enables you to track the packages you use for your work (enabling you to create reproducable environments, so that others can also use your code). It also allows you to use packages which might have conflicting requirements (or even different versions of the same package) without the hassle of haveing to install and uninstall these each time.

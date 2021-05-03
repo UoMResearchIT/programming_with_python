@@ -3,11 +3,17 @@ title: "Numpy and Matplotlib Essential"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How do I select data within tables for processing?"
+- "How can I load different data formats?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn about numpy matrix objects"
+- "Learn about masking datasets"
+- "Learn about specialised data formats, and how to use them"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Numpy arrays are not matrix objects"
+- "Array masks can be created using conditional statements"
+- "Numpy arrays can be masked to hide data you don't want to include in an analysis"
+- "Numpy libraries are available for reading a lot of different file formats"
 ---
 
 As suggested in one of the previous challenges, the numpy library provides an object called array, which is very similar object to the list. The main difference is the set of operations that can be performed on them. Numpy arrays are oriented towards computation.
@@ -151,45 +157,54 @@ Masked arrays associate a numpy array with another array composed only of boolea
 To demonstrate this we are going to create a Gaussian function and use it to generate an example dataset and generate a plot. We will then add some noise to it and use a masked array to filter out the noisy data.
 
 Reminder: the Gaussian function is define by:
-$$
-g(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-$$
+![Gaussian function equation.](../fig/gauss_function.png)
 
 > ## Gaussian Function
-> 1. Create a function called `gauss` which will take three arguments (inputs): *x*, *mu*, and *sigma*, as defined above. (x is an array, mu is the position of the centre of the curve/peak and sigma is the width of the bell)
-> 2. Create a numpy array using the 'numpy' function 'linspace' which will contain 1000 points equally spaced between x=-100 and x=100. Hint: You can print the help documentation of a function with 'help(name_of_the_function)'
-> 3. Using the above gauss function and the array, create a list which contains the value of the gauss from x=-100 to x=100.
+> 1. Create a function called `gauss` which will take three arguments (inputs):
+> **x**, **µ**, and **σ**,
+> as defined above. (x is an array, µ is the position of the centre of the
+> curve/peak and σ is the width of the bell)
+> 2. Create a numpy array using the 'numpy' function 'linspace' which will contain 1000
+> points equally spaced between x=-100 and x=100. Hint: You can print the help
+> documentation of a function with 'help(name_of_the_function)'
+> 3. Using the above gauss function and the array, create a list which contains the value
+> of the gauss from x=-100 to x=100.
 > 4. Use the 'matplotlib' library to plot the curve with mu=0 and sigma=10.
+>
+> > ## challenge 1:
+> > ~~~
+> > def gauss(x, mu=0, sigma=1):
+> >     return (1./(sigma * np.sqrt(2 * np.pi)) *
+> >             np.exp( - (x - mu)**2 / (2 * sigma**2)))
+> > ~~~
+> > {: .language-python}
+> {: .solution}
+>
+> > ## challenge 2:
+> > ~~~
+> > x = np.linspace(-100, 100, 1000)
+> > ~~~
+> > {: .language-python}
+> {: .solution}
+>
+> > ## challenge 3:
+> > ~~~
+> > mu = 0   # the position of the center of the peak
+> > sigma = 10  # # The width of the 'bell'
+> > g = gauss(x, mu, sigma)
+> > ~~~
+> > {: .language-python}
+> {: .solution}
+>
+> > ## challenge 4:
+> > ~~~
+> > plt.plot(x, g)
+> > plt.show()
+> > ~~~
+> > {: .language-python}
+> {: .solution}
 {: .challenge}
 
-challenge 1:
-~~~
-def gauss(x, mu=0, sigma=1):
-    return (1./(sigma * np.sqrt(2 * np.pi)) *
-            np.exp( - (x - mu)**2 / (2 * sigma**2)))
-~~~
-{: .language-python}
-
-challenge 2:
-~~~
-x = np.linspace(-100, 100, 1000)
-~~~
-{: .language-python}
-
-challenge 3:
-~~~
-mu = 0   # the position of the center of the peak
-sigma = 10  # # The width of the 'bell'
-g = gauss(x, mu, sigma)
-~~~
-{: .language-python}
-
-challenge 4:
-~~~
-plt.plot(x, g)
-plt.show()
-~~~
-{: .language-python}
 
 
 ## Noisy Signal
@@ -243,6 +258,145 @@ cd data
 ls *.fits
 ~~~
 {: .language-python}
+
+We need to use the astropy I/O library fits to open this file. This can be imported as:
+~~~
+import astropy.io.fits as pyfits
+~~~
+{: .language-python}
+
+The file can now be opened using:
+~~~
+im1 = pyfits.open('data/502nmos.fits')
+~~~
+{: .language-python}
+
+> ## Memory management for large files
+> By default pyfits opens a file with the option `memmap=True`. This option opens the fits
+> file withou copying the data into memory and allows us to open very large files which
+> will not fit into physical memory.
+{: .callout}
+
+Fits files are composed of a list of HDUs (Header and data units). We can list the information with the method `info`.
+~~~
+im1.info()
+~~~
+{: .language-python}
+~~~
+Filename: data/502nmos.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     290   (1600, 1600)   float32
+  1  502nmos_cvt.tab    1 TableHDU       353   1R x 49C   [D25.17, D25.17, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, A1, E15.7, I12, I12, D25.17, D25.17, A8, A8, I12, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, I12, I12, I12, I12, I12, I12, I12, I12, A48, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7, E15.7]
+~~~
+{: .output}
+Here we're only interested in the primary HDU which is an image and is called *PRIMARY*.
+The base file system can be accessed in the same manner as a dictionary - using either the key `im1['PRIMARY']` or the index `im1[0]`.
+
+The image comprises of two parts: a header, and then the image data. The header can be accessed using the `header` attribute:
+~~~
+im1['PRIMARY'].header
+~~~
+{: .language-python}
+~~~
+SIMPLE  =                    T / FITS STANDARD
+BITPIX  =                  -32 / FITS BITS/PIXEL
+NAXIS   =                    2 / NUMBER OF AXES
+NAXIS1  =                 1600 /
+NAXIS2  =                 1600 /
+EXTEND  =                    T / There maybe standard extensions
+BSCALE  =                1.0E0 / REAL = TAPE*BSCALE + BZERO
+BZERO   =                0.0E0 /
+OPSIZE  =                 2112 / PSIZE of original image
+ORIGIN  = 'STScI-STSDAS'       / Fitsio version 21-Feb-1996
+FITSDATE= '2005-07-01'         / Date FITS file was created
+FILENAME= '502nmos_cvt.hhh'    / Original filename
+...
+~~~
+{: .output}
+
+To access the data we use the `data` attribute:
+~~~
+imdata = im1['PRIMARY'].data
+type(imdata)
+~~~
+{: .language-python}
+~~~
+<class 'numpy.ndarray'>
+~~~
+{: .output}
+Note that this data is in the form of a numpy array, and so we can use our standard numpy tools for processing and displaying this data.
+
+To start with we will look at the unprocessed image of the nebulae:
+~~~
+plt.imshow(imdata, origin='lower', cmap='gray')
+plt.colorbar()
+~~~
+{: .language-python}
+![Nebulae image in greyscale. Mostly black background, with two small white dots.](../fig/nebulae_raw.png)
+
+As is common for astronomical images, it is difficult to see anything on this image because a few very bright objects within the frame have saturated the CCD, and so a linear output shows only a limited number of pixels.
+
+To improve the visible output we will carry out some simple analysis of the image, so that we can solve this contrast problem.
+
+First we examine the general stats of the data (using built-in methods, except for the median, which has to be called from numpy directly):
+~~~
+print('mean value im1:', imdata.mean())
+print('median value im1:', np.median(imdata))
+print('max value im1:', imdata.max())
+print('min value im1:', imdata.min())
+~~~
+{: .language-python}
+~~~
+mean value im1: 6.237272
+median value im1: 6.7385635
+max value im1: 2925.8718
+min value im1: -12.439324
+~~~
+{: .output}
+These show that, while the range is very large, the mean and median values are both very low, suggesting that there are only a few pixels with very high values.
+
+This can be confirmed by plotting a histogram of the number of pixels vs the number of photons:
+~~~
+hist = plt.hist(imdata.ravel(), bins=100)
+plt.xlabel('Number of Photons')
+plt.ylabel('Pixel Count')
+~~~
+{: .language-python}
+![Histogram showing photon count, with (almost) all values around 0.](../fig/photon_count_a.png)
+This confirms our suspicions that many pixels have very low photon counts.
+
+> ## Flattening N-D arrays
+> To plot a histogram of all the data we needed to flatten the two dimensional data array.
+> This was done using the built-in `ravel` function.
+{: .callout}
+
+To see the full range of photon counts we will use a log scale:
+~~~
+hist = plt.hist(imdata.ravel(), bins=100)
+plt.yscale('log')
+plt.xlabel('Number of Photons')
+plt.ylabel('Pixel Count')
+~~~
+{: .language-python}
+![Histogram showing photon count, with a log scale showing the long tail of high values.](../fig/photon_count_b.png)
+
+While almost all pixels have a photon count of zero (or near zero), only a few (<1000) photon counts are above 100. There does appear to be a significant number of pixels with values between these two extremes though, so we will constrain the range of our x-axis to between the limits of 1 and 30, to better see these data. The limit of 30 is obtained through previous analysis - if you were carrying out this investigation of the data yourself you would use trail and error to find the best cut-off point for this plot.
+~~~
+hist = plt.hist(imdata.ravel(), bins=100, range=(1,30))
+plt.xlabel('Number of Photons')
+plt.ylabel('Pixel Count')
+~~~
+{: .language-python}
+![Histogram showing photon counts between 1 and 30](../fig/photon_count_c.png)
+We see that there is a bi-modal distribution, with the largest peak around 8-9 photons, and a smaller peak around 3-4 photons.
+
+Now that we can see that the majority of the data is below a photon count of 25, we can start manipulating our image plot to see more details of the nebulae:
+~~~
+plt.imshow(imdata, origin='lower', cmap='gray', vmax=25)
+plt.colorbar()
+~~~
+{: .language-python}
+![Nebulae image in greyscale, with a photon count limit of 25. Collage of images showing the shape of the nebulae](../fig/nebulae_25limit.png)
 
 
 {% include links.md %}

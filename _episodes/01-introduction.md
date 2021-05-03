@@ -3,11 +3,15 @@ title: "Introduction"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "What did we do before?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Understanding key concepts in Python"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "variables"
+- "lists"
+- "indexing"
+- "loops"
+- "conditionals"
 ---
 
 This course follows on from the python introduction course. To ensure that we are starting from similar positions, there follows a short multiple choice quiz on key python concepts that we will be building on through this course.

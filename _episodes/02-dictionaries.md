@@ -3,11 +3,18 @@ title: "Dictionaries"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How can I work with relational datasets?"
+- "How can I access remote data directly in my scripts?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn about JSON format"
+- "How to create dictionaries"
+- "Loading JSON data and working with it"
+- "Using web API's for accessing remote data"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "JSON is simple"
+- "Dictionaries are defined using `key`:`value` pairs"
+- "Dictionaries can be nested, and mixed with lists"
+- "Web API's can be accessed using the `requests` library"
 ---
 
 In previous lessons we have learnt about lists and numpy multi-dimensional arrays, which are designed for working with structured, tabular, datasets. But much of the data that we use in our day to day lives, such as that in data catalogs or the communications between modern digital services, does not fit nicely into these tabular datasets. Instead unstructured data formats, which use labels or 'keys' to identify each data object are needed. One of the most common formats for such data is the [JavaScript Object Notation (JSON)](https://en.wikipedia.org/wiki/JSON) file format. This format was originally developed to fulfil the need for a self-contained, flexible format for real-time server-to-browser communication, and is now used as the basis for many unstructured data formats.

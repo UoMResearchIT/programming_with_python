@@ -3,7 +3,7 @@ title: "Units and Quantities"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How can I ensure consistent units in my code?"
 objectives:
 - "First learning objective. (FIXME)"
 keypoints:

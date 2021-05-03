@@ -3,7 +3,8 @@ title: "Defensive Programming"
 teaching: 0
 exercises: 0
 questions:
-- "Key question (FIXME)"
+- "How can I catch errors in my data?"
+- "How can I make best use of error messages?"
 objectives:
 - "First learning objective. (FIXME)"
 keypoints:
