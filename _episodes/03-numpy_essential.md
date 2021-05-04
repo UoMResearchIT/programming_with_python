@@ -398,6 +398,81 @@ plt.colorbar()
 {: .language-python}
 ![Nebulae image in greyscale, with a photon count limit of 25. Collage of images showing the shape of the nebulae](../fig/nebulae_25limit.png)
 
+### Masked Arrays (part 2)
+
+Rather than applying the filtering of our data within the plotting tool, we can instead use masked arrays to filter our data. This allows for more nuanced filtering of the data.
+
+We begin with creating a mask to remove values greater than 25:
+~~~
+immasked - np.ma.masked_greater(imdata, 25)
+~~~
+{: .language-python}
+
+The `immasked` array contains the `imdata` data (you can test this by plotting `immasked` using `imshow` as we did at the start of this section). It also contains an attribute `mask`, which is applied to filter the data when it is plotted. We can plot this directly to see what is being removed:
+~~~
+plt.imshow(immasked.mask, cmap='gray', origin='lower')
+~~~
+{: .language-python}
+![Nebulae mask image in greyscale, with a photon count limit of 25. A black background, with a few bright dots where the limit is exceeded.](../fig/nebulae_25mask.png)
+
+This mask is applied to the data for all built-in functions. But where we have to directly use a numpy function we have to make sure we use the equivalent function in the mask (`ma`) library:
+~~~
+print('original average:', imdata.mean())
+print('Masked average:', immasked.mean())
+print()
+print('original max:', imdata.max())
+print('Masked max:', immasked.max())
+print()
+print('original min:', imdata.min())
+print('Masked min:', immasked.min())
+print()
+print('original median:', np.mean(imdata))
+print('Masked median:', np.ma.median(immasked))
+~~~
+{: .language-python}
+~~~
+original average: 6.237272
+Masked average: 5.976717048232941
+
+original max: 2925.8718
+Masked max: 24.981937
+
+original min: -12.439324
+Masked min: -12.439324
+
+original median: 6.237272
+Masked median: 6.725283622741699
+~~~
+{: .output}
+
+> ## Removing negative photon counts
+> Photon counts cannot be negative, but some of our data is (some is due to no
+> measurements being taken, and some is also likely due to sampling
+> errors). So we would like to remove these erroneous data from our plot too.
+> 1. Create a new masked array (`immasked2`) where the lower limit is set to zero (you can use the `np.ma.masked_less_equal` function to do this).
+> 2. Update the immasked2.mask to apply both masks (you can use the logical or `|` operator to do this). Then plot the new asked data array.
+>
+> > ## New mask
+> > ~~~
+> > immasked2 = np.ma.masked_less_equal(imdata, 0)
+> > ~~~
+> > {: .language-python}
+> {: .solution}
+>
+> > ## Combining masks
+> > ~~~
+> > immasked2.mask = immasked2.mask | immasked.mask
+> > ~~~
+> > {: .language-python}
+> >
+> > ~~~
+> > plt.imshow(immasked2, cmap='gray', origin='lower')
+> > plt.colorbar()
+> > ~~~
+> > {: .language-python}
+> > ![Nebulae image in greyscale, with a photon count limits of greater than 0 and less than 25. Collage of images showing the shape of the nebulae, and removing parts of the image where no data was collected.](../fig/nebulae_25_0mask.png)
+> {: .solution}
+{: .challenge}
 
 {% include links.md %}
 
