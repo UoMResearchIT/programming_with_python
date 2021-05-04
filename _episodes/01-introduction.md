@@ -1,9 +1,9 @@
 ---
-title: "Introduction"
+title: "Python Basics Recap"
 teaching: 0
 exercises: 0
 questions:
-- "What did we do before?"
+- "Python Refresher"
 objectives:
 - "Understanding key concepts in Python"
 keypoints:
