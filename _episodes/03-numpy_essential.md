@@ -154,7 +154,7 @@ A very useful tool that numpy provides for working with experimental data is the
 
 Masked arrays associate a numpy array with another array composed only of boolean values (True or False). These tell numpy whether to use (or not) the respective element.
 
-To demonstrate this we are going to create a Gaussian function and use it to generate an example dataset and generate a plot. We will then add some noise to it and use a masked array to filter out the noisy data.
+To demonstrate this we are going to create a Gaussian function and use it to generate an example dataset and generate a plot. We will then add some noise to it and use a masked array to filter out the noisy data. This represents the kind of processing that can be used for datasets such as a seismographs, where we would wish to isolate single events from noisy background data.
 
 Reminder: the Gaussian function is define by:
 ![Gaussian function equation.](../fig/gauss_function.png)
@@ -202,6 +202,7 @@ Reminder: the Gaussian function is define by:
 > > plt.show()
 > > ~~~
 > > {: .language-python}
+> > ![Gaussian curve plot](../fig/gauss_curve.png)
 > {: .solution}
 {: .challenge}
 
@@ -209,41 +210,45 @@ Reminder: the Gaussian function is define by:
 
 ## Noisy Signal
 
-Now we are going to add some random noise to that curve. To do it we can use the numpy function normal from the module random provided by numpy library:
-
+Now we are going to add some random noise to that curve. To do it we can use the numpy function `normal` from the module `random` provided by numpy library. We will scale the magnitude of the noise so it is (roughly) a 10th of the magnitude of the gaussian maximum:
 ~~~
-g = 100*g   # To have something visible we are multiplying the function by 100.
-
-# Creation of the noise
-noisy = np.random.normal(g)
-plt.plot(x, g+noisy)
+noisy = np.random.normal(g, scale=g.max()/10)
+plt.plot(x, noisy)
 plt.show()
 ~~~
 {: .language-python}
+![Gaussian curve plot, with random noise added](../fig/gauss_curve_noisy.png)
 
-A way to calculate the 'Signal to Noise' ratio of the previous data set is by dividing the noisy data by the standard deviation of the noisy data.
+
+To identify any signal in the data we can use the standard deviation as an estimate of the noise around the mean value of the data.
 ~~~
-# Get standard dev of noisy data
-rms = np.std(noisy)
-# Divide noisy data by std dev
-SN = noisy / rms
-# Plot
-plt.plot(SN)
-plt.show()
+stddev_noisy = np.std(noisy)
+mean_noisy = np.mean(noisy)
+print('standard deviation is: {}'.format(stddev_noisy))
+print('mean value is: {}'.format(mean_noisy))
 ~~~
 {: .language-python}
-
-We will next create a mask that masks the data where the SN (signal to noise) is less than 1)
 ~~~
-mask = SN < 1
-print('Signal to noise:',SN[:10])
-print('Mask:',mask[:10])
-print('Mask shape:',mask.shape)
+standard deviation is: 0.011592652442611553
+mean value is: 0.005047252119578472
+~~~
+{: .output}
+
+We will create a mask for the data, by selecting all datapoints below this threshold value (we'll assume here that any signal we might be interested in is positive):
+~~~
+mask = noisy < (stddev_noisy + mean_noisy)
+~~~
+{: .language-python}
+This creates an array of boolean values, the same shape as our original data, with `True` values where the conditional statement has been met.
+
+The mask and noisy data can now be combined using the `array` function of the numpy masked arrays module (`np.ma`). Any `True` value in the mask will exclude the corresponding element from subsequent computation or plotting:
+~~~
 noisy_ma = np.ma.array(noisy, mask=mask)
 plt.plot(noisy_ma)
 plt.show()
 ~~~
 {: .language-python}
+![Gaussian curve plot, with only data above threshold plotted](../fig/gauss_curve_signal.png)
 
 ## Working with images
 
