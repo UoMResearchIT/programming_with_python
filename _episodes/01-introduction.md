@@ -85,6 +85,10 @@ We want to use the functions in the `numpy` library in our code. How do we open 
 2. `load numpy`
 3. `open numpy`
 
+> ## Solution
+> Answer 1 is correct
+{: .solution}
+
 ## If statements and conditionals
 
 ### 6. Conditionals
