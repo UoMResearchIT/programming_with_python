@@ -120,7 +120,7 @@ d = {'alice': 35, 'bob': 18}
 ~~~
 print(d)
 ~~~
-{: .language-bash}
+{: .language-python}
 
 ~~~
 {'alice': 35, 'bob': 18}
@@ -131,17 +131,17 @@ Alternatively, a dictionary object can be created using the `dict` function, in 
 ~~~
 d2 = dict([('alice', 35), ('jane', 24), ('bob',18)])
 ~~~
-{: .language-bash}
+{: .language-python}
 or with direct association:
 ~~~
 d3 = dict(bob=18, alice=35, jane=24)
 ~~~
-{: .language-bash}
+{: .language-python}
 or using the special `zip` method, which can be used to create a set of tuples from the given iterable lists:
 ~~~
 d4 = dict(zip(['jane','alice','bob'],[24,35,18]))
 ~~~
-{: .language-bash}
+{: .language-python}
 
 ### Accessing elements
 
@@ -151,7 +151,7 @@ key = 'alice'
 print('The name of the person is used as key:', key)
 print('The value associated to that key is:', d[key])
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 The name of the person is used as key: alice
 The value associated to that key is: 35
@@ -160,14 +160,14 @@ The value associated to that key is: 35
 
 ### Adding an element
 
-Adding an element to a dictionary is done by creating a new key and affecting a value to it.
+Adding an element to a dictionary is done by creating a new key and attaching a value to it.
 
 ~~~
 print('Original dictionary:', d)
 d['jane']=24
 print('New dictionary:', d)
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 Original dictionary: {'alice': 35, 'bob': 18}
 New dictionary: {'alice': 35, 'bob': 18, 'jane': 24}
@@ -181,7 +181,7 @@ d_extra = {'tom': 54, 'david': 87}
 d.update(d_extra)
 print('Updated dictionary:', d)
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 Updated dictionary: {'alice': 35, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 ~~~
@@ -193,7 +193,7 @@ Updated dictionary: {'alice': 35, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 > ~~~
 > {'alice': 35} + {'bob': 18}
 > ~~~
-> {: .language-bash}
+> {: .language-python}
 >
 > ~~~
 > ---------------------------------------------------------------------------
@@ -214,7 +214,7 @@ Updated dictionary: {'alice': 35, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 > d['alice']=12
 > print('New dictionary:', d)
 > ~~~
-> {: .language-bash}
+> {: .language-python}
 > ~~~
 > Original dictionary: {'alice': 35, 'bob': 18, 'jane': 24}
 > New dictionary: {'alice': 12, 'bob': 18, 'jane': 24}
@@ -237,7 +237,7 @@ print('Dictionary 1 and dictionary 2 are not equal:', d1 == d2)
 print('Dictionary 1 and dictionary 3 are not equal:', d1 == d3)
 print('Dictionary 3 and dictionary 4 are equal:', d3 == d4)
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 Dictionary 1 and dictionary 2 are not equal: False
 Dictionary 1 and dictionary 3 are not equal: False
@@ -252,7 +252,7 @@ Dictionaries have their own methods. Two of the most useful are keys and values 
 ~~~
 d.keys()
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 dict_keys(['alice', 'bob', 'jane', 'tom', 'david'])
 ~~~
@@ -261,7 +261,7 @@ dict_keys(['alice', 'bob', 'jane', 'tom', 'david'])
 ~~~
 d.values()
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 dict_values([12, 18, 24, 54, 87])
 ~~~
@@ -273,7 +273,7 @@ It is possible to test if a key is present in the dictionary (or not) using the 
 ~~~
 'alice' in d
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 True
 ~~~
@@ -282,7 +282,7 @@ True
 ~~~
 'mark' in d
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 False
 ~~~
@@ -292,7 +292,7 @@ Note, however, that we can't directly test for the presence of values:
 ~~~
 12 in d
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 False
 ~~~
@@ -301,7 +301,7 @@ Instead we would have to use the `values` method to search these:
 ~~~
 12 in d.values()
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 True
 ~~~
@@ -324,7 +324,7 @@ for filename in filenames:
 ~~~
 {: .language-python}
 
-The `f.load` function reads the file as a single string, which the `json.loads()` function then turns into a dictionary, following the `json` standard.
+The `f.read` function reads the file as a single string, which the `json.loads()` function then turns into a dictionary, following the `json` standard.
 
 
 
