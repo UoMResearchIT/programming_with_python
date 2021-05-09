@@ -34,7 +34,7 @@ We will not cover installation in this lession, but more information is availabl
 
 ## Package Channels
 
-Conda uses "channels", locations where software packages are stored. Conda has a default set of these channels that it searches when you request a package or update. You can modify this list of channels, to add other public or private channels that you wish to use. One of the most commonly added is [conda-forge](https://conda-forge.org/), a community channel with thousands of contributors who use its unified, automated build infrastructure to share their software with the world.
+Conda uses "channels", locations where software packages are stored. Conda has a default set of these channels that it searches when you request a package or update. You can modify this list of channels, to add other public or private channels that you wish to use. One of the most commonly added is [conda-forge](https://conda-forge.org/), a community channel with thousands of contributors who use its unified, automated build infrastructure to share their software with the world. Another widely-used channel is [bioconda](https://bioconda.github.io/), which is dedicated to bioinformatics software.
 
 We can see what channels are being used by the command:
 ~~~
@@ -50,7 +50,123 @@ channels:
 ~~~
 {: .output}
 
+The channel order is important for determining priority when installing packages - those from channels higher in the list will be given priority over those lower in the list. After this the newer versions of a package are given priority over older versions of a package (and then build numbers, for a given version). The order in which priority is determined can be changed, we won't cover this today, but more information can be found in the [conda managing channels](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/tasks/manage-channels.html) documentation.
+
+To add a channel we can use:
+~~~
+conda config --add channels bioconda
+conda config --show channels
+~~~
+{: .language-bash}
+~~~
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+~~~
+{: .output}
+This adds the new channel to the start of the list. Which gives that channel highest priority. The documentation for bioconda, however, recommends a priority order of conda-forge, bioconda, and finally defaults. To correct the channel order we can simply re-add the conda-forge channel:
+~~~
+conda config --add channels conda-forge
+~~~
+{: .language-bash}
+~~~
+Warning: 'conda-forge' already in 'channels' list, moving to the top
+~~~
+{: .output}
+When we do this we should be warned the channel is already in the list, but it is being moved up to the highest priority position.
+
+> ## removing or appending channels
+> Channels can be removed using the `--remove` flag instead of `--add`. To add a channel
+> to the end of the list, rather than the front, we can use `--append` instead of `--add`
+> (and, if we wish to be explicit in our intent to put a channel at the front of the list
+> we can use `--prepend`, which behaves in the exact same way as `--add`).
+{: .callout}
+
 ## Searching for Packages
+
+Once you've added the channels you wish to use, now you can search them for the software that you need. This is simply carried out using `conda search`. For example, if we wished to find out what versions of [Gromacs](https://www.gromacs.org/About_Gromacs) are available, we can use:
+~~~
+conda search gromacs
+~~~
+{: .language-bash}
+~~~
+# Name                       Version           Build  Channel
+gromacs                        4.6.5               0  bioconda
+gromacs                       2018.3      h470a237_0  bioconda
+gromacs                       2018.4      h470a237_0  bioconda
+gromacs                       2018.5      h04f5b5a_0  bioconda
+gromacs                       2018.6      h04f5b5a_0  bioconda
+gromacs                       2018.6      h04f5b5a_1  bioconda
+gromacs                       2018.6      hd895feb_2  bioconda
+gromacs                         2019      h04f5b5a_0  bioconda
+gromacs                       2019.1      h04f5b5a_0  bioconda
+gromacs                       2019.1      h04f5b5a_1  bioconda
+gromacs                       2019.1      h04f5b5a_2  bioconda
+gromacs                       2020.5      hd895feb_1  bioconda
+gromacs                       2020.5      hd895feb_2  bioconda
+gromacs                       2020.5      hd895feb_3  bioconda
+gromacs                       2020.5      hd895feb_4  bioconda
+gromacs                       2020.5      hd895feb_5  bioconda
+gromacs                       2020.6      h94ec9d8_0  bioconda
+gromacs                         2021      hd895feb_0  bioconda
+gromacs                         2021      hd895feb_1  bioconda
+gromacs                       2021.1      hd895feb_0  bioconda
+~~~
+{: .output}
+This shows you the name of the package you searched for, then the version of the software, build number (which can increment up as bugs are fixed, see above for version 2020.5), and the channel that the package is in.
+
+If we know the version of the softare we are interested in we can narrow this search down. For example, if we are only interested in gromacs versions greater than `2020` we can use:
+~~~
+conda search 'gromacs>=2020'
+~~~
+{: .language-bash}
+~~~
+# Name                       Version           Build  Channel
+gromacs                       2020.5      hd895feb_1  bioconda
+gromacs                       2020.5      hd895feb_2  bioconda
+gromacs                       2020.5      hd895feb_3  bioconda
+gromacs                       2020.5      hd895feb_4  bioconda
+gromacs                       2020.5      hd895feb_5  bioconda
+gromacs                       2020.6      h94ec9d8_0  bioconda
+gromacs                         2021      hd895feb_0  bioconda
+gromacs                         2021      hd895feb_1  bioconda
+gromacs                       2021.1      hd895feb_0  bioconda
+~~~
+{: .output}
+Note that we've put the search string in quotations, in order to ensure it is passed to conda correctly.
+
+We can also use wildcards in the version string, For example, if we wish to find all numpy packages with version 1.20:
+~~~
+conda search 'numpy==1.20.*'
+~~~
+{: .language-bash}
+~~~
+# Name                       Version           Build  Channel
+numpy                         1.20.0  py37h3795f5d_0  conda-forge
+numpy                         1.20.0  py37ha9839cc_0  conda-forge
+numpy                         1.20.0  py38h64deac9_0  conda-forge
+numpy                         1.20.0  py39h3c955ea_0  conda-forge
+numpy                         1.20.1  py37h3795f5d_0  conda-forge
+numpy                         1.20.1  py37h43259c0_0  pkgs/main
+numpy                         1.20.1  py37ha9839cc_0  conda-forge
+numpy                         1.20.1  py37hd6e1bb9_0  pkgs/main
+numpy                         1.20.1  py38h43259c0_0  pkgs/main
+numpy                         1.20.1  py38h64deac9_0  conda-forge
+numpy                         1.20.1  py38hd6e1bb9_0  pkgs/main
+numpy                         1.20.1  py39h3c955ea_0  conda-forge
+numpy                         1.20.1  py39h43259c0_0  pkgs/main
+numpy                         1.20.1  py39hd6e1bb9_0  pkgs/main
+numpy                         1.20.2  py37h84c02c4_0  conda-forge
+numpy                         1.20.2  py37hc415c66_0  conda-forge
+numpy                         1.20.2  py38had91d27_0  conda-forge
+numpy                         1.20.2  py39h7eed0ac_0  conda-forge
+~~~
+{: .output}
+Note that the build string now starts with `pyXX`, where `XX` indicates the version of python the package was built against. When conda packages are dependent on python then they usually will be built against a number of different versions of python - which gives more flexibility when trying to create an environment. Also note that two channels are listed here `pkgs/main` and `conda-forge`, which do duplicate some versions, but also note that `conda-forge` has the most recent version of the `numpy` software, whereas the default channel does not. `conda-forge` tends to be updated more frequently than the default channels.
+
+
+
 
 ~~~
 conda search 'spyder>=4.2'
@@ -79,7 +195,33 @@ conda env list
 base                  *  /Users/mbessdl2/anaconda3
 ~~~
 {: .output}
-This shows you the environments you have installed, the path where they are installed, and indicates which environment you currently have loaded.
+This shows you the environments you have installed, and the path where they are installed. In addition the `*` indicates which environment you currently have loaded.
+
+You can list the packages you have installed in your current environment using:
+~~~
+conda list
+~~~
+{: .language-bash}
+~~~
+# packages in environment at /Users/mbessdl2/anaconda3:
+#
+# Name                    Version                   Build  Channel
+_anaconda_depends         2019.03                  py37_0
+_ipyw_jlab_nb_ext_conf    0.1.0                    py37_0
+alabaster                 0.7.12                     py_0    conda-forge
+anaconda                  custom                   py37_1
+anaconda-client           1.7.2                      py_0    conda-forge
+anaconda-navigator        1.9.12                   py37_0
+anaconda-project          0.8.3                      py_0    conda-forge
+...
+zip                       3.0                  h1de35cc_1    conda-forge
+zipp                      3.1.0                      py_0    conda-forge
+zlib                      1.2.11            h0b31af3_1006    conda-forge
+zstd                      1.4.4                he7fca8b_1    conda-forge
+~~~
+{: .output}
+
+
 
 A new conda environment can be created using the command:
 ~~~
@@ -94,14 +236,28 @@ base                  *  /Users/mbessdl2/anaconda3
 myenv                    /Users/mbessdl2/anaconda3/envs/myenv
 ~~~
 {: .output}
-This environment will be empty of all packages though (you will find out later how to check this).
+This environment will be empty of all packages though, as we can show by specifying the `myenv` environment when we list the installed packages:
+~~~
+conda list myenv
+~~~
+{: .language-bash}
+~~~
+# packages in environment at /Users/mbessdl2/anaconda3:
+#
+# Name                    Version                   Build  Channel
+~~~
+{: .output}
 
-We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example:
+
+We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example, we will create the `myenv` environment again, this time installing the [spyder](https://www.spyder-ide.org/) IDE package:
 ~~~
 conda create --name myenv spyder
 ~~~
 {: .language-bash}
-This will list the packages which are to be downloaded, and those which will be installed, before asking if you wish to continue. Press `[y]` to continue, and then check that the environment exists using conda env list as before.
+This will warn you that you are about to overwrite another environment, press `[y]` to continue. Conda will then workout the new environment setup (which can take a little time), and then will list the packages which are to be downloaded, and those which will be installed, before asking if you wish to continue. Press `[y]` to continue, and then check that the environment exists and that the packages you expect are installed using `conda env list`, and `conda list myenv` as before.
+
+
+
 
 ## Activating and Deactivating Environments
 
@@ -117,11 +273,6 @@ Before we can use this software, we must activate the environment it is in. This
 conda activate myenv
 ~~~
 {: .language-bash}
-or (if your shell has not been configured to use conda activate)
-~~~
-. activate myenv
-~~~
-{: .language-bash}
 Once this done you should see the name of the environment you are using in brackets before your command prompt. And you will now be able to access the program:
 ~~~
 which spyder
@@ -132,8 +283,118 @@ which spyder
 ~~~
 {: .output}
 
+> ##
+> If your shell has not been configured to use conda activate, then you might be able to
+> use this command to activate the environment:
+> ~~~
+> . activate myenv
+> ~~~
+> {: .language-bash}
+>
+{: .callout}
 
 
+## Recording and Reproducing Environment Setups
+
+A big advantage of using virtual environments is the ability to record the environment in which you carry out your work, so that this can be shared with others in order to help them replicate your work.
+
+The most basic way to obtain this information is using:
+~~~
+conda list --export
+~~~
+{: .language-bash}
+~~~
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: osx-64
+_anaconda_depends=2019.03=py37_0
+_ipyw_jlab_nb_ext_conf=0.1.0=py37_0
+alabaster=0.7.12=py_0
+anaconda=custom=py37_1
+anaconda-client=1.7.2=py_0
+anaconda-navigator=1.9.12=py37_0
+anaconda-project=0.8.3=py_0
+...
+zip=3.0=h1de35cc_1
+zipp=3.1.0=py_0
+zlib=1.2.11=h0b31af3_1006
+zstd=1.4.4=he7fca8b_1
+~~~
+{: .output}
+This contains similar information to the standard `conda list` command, but in a machine readable formation. The output information can be saved to a text file using `conda list --export > envfile.txt`, which can then be used to recreate the environment elsewhere, using the command `conda create --name <env> --file <this file>`. However, it should be noted that this will be restricted to the operating system it is created on, and the channel information is not recorded in this output - so if you have used more than just the default and conda-forge channels it may be difficult for someone else to replicate.
+
+
+
+A better method is to use:
+~~~
+conda env export
+~~~
+{: .language-bash}
+~~~
+name: base
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - _anaconda_depends=2019.03=py37_0
+  - _ipyw_jlab_nb_ext_conf=0.1.0=py37_0
+  - alabaster=0.7.12=py_0
+  - anaconda=custom=py37_1
+  - anaconda-client=1.7.2=py_0
+  - anaconda-navigator=1.9.12=py37_0
+  - anaconda-project=0.8.3=py_0
+...
+  - zip=3.0=h1de35cc_1
+  - zipp=3.1.0=py_0
+  - zlib=1.2.11=h0b31af3_1006
+  - zstd=1.4.4=he7fca8b_1
+prefix: /Users/mbessdl2/anaconda3
+~~~
+{: .output}
+This will present the same information, but in the more readable [YAML](https://yaml.org/) format, and it will also include the channel information in the output. This information can be saved as a text file as before, and used to create a new environment using the command `conda env create`. However it is still operating system specific information.
+
+To create a higher-level record of the environment you can use:
+~~~
+conda env export --from-history
+~~~
+{: .language-bash}
+~~~
+name: base
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - conda
+  - python=3.7
+  - conda-env
+  - conda-build
+  - conda-verify
+  - _ipyw_jlab_nb_ext_conf
+  - anaconda
+  - anaconda-navigator==1.9.12
+  - navigator-updater
+  - start_jupyter_cm
+  - nb_conda
+  - conda-smithy
+  - conda-forge-pinning
+  - wget
+  - zip
+  - unzip
+  - tree
+  - svn
+prefix: /Users/mbessdl2/anaconda3
+~~~
+{: .output}
+This builds a list of only the packages that you explicitly requested installed in that environment. Where you have specified a particular version of a package, then this will be recorded, but otherwise the version number will be unconstrained. If you wish to constrain the version of a package (for example, if a certain feature you use has been removed in more recent versions of the package), then you will need to edit this information to specify that (using the information given by the standard `conda list` command).
+
+To create a new environment from either of these YAML environment files, you can use the command:
+~~~
+conda env create --file <env file> --name <env name>
+~~~
+{: .language-bash}
+The name you give the environment does not have to be the same as that in the file, but if you don't give a name then the name in the file will be used.
 
 
 {% include links.md %}
