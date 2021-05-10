@@ -147,6 +147,16 @@ d4 = dict(zip(['jane','alice','bob'],[24,35,18]))
 
 To access an element of the dictionary we must use the *key*:
 ~~~
+print('The age of alice is :', d['alice'])
+~~~
+{: .language-python}
+~~~
+The age of alice is: 35
+~~~
+{: .output}
+
+We can also use a variable to index the dictionary:
+~~~
 key = 'alice'
 print('The name of the person is used as key:', key)
 print('The value associated to that key is:', d[key])
@@ -247,7 +257,7 @@ Dictionary 3 and dictionary 4 are equal: True
 
 ## Splitting out keys and values
 
-Dictionaries have their own methods. Two of the most useful are keys and values which, as their name suggest, extract all the keys and all the values in an iterator.
+Dictionaries have some special methods. Two of the most useful are `keys` and `values`. These return the keys and the values of the dictionary respectively.
 
 ~~~
 d.keys()
@@ -264,6 +274,28 @@ d.values()
 {: .language-python}
 ~~~
 dict_values([12, 18, 24, 54, 87])
+~~~
+{: .output}
+
+Note that the *dict_keys* and *dict_values* objects are iterable but are not lists. This means that they can be used somewhere like a `for` loop but you can not index them directly. 
+~~~
+d.values()[0]
+~~~
+{: .language-python}
+~~~
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'dict_keys' object is not subscriptable
+~~~
+{: .output}
+
+If you want to index keys or values directly, you can convert them to lists with the `list` function.
+~~~
+d.values()[0]
+~~~
+{: .language-python}
+~~~
+12
 ~~~
 {: .output}
 
