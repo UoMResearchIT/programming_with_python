@@ -16,17 +16,9 @@ keypoints:
 - "Numpy libraries are available for reading a lot of different file formats"
 ---
 
-As suggested in one of the previous challenges, the numpy library provides an object called array, which is very similar object to the list. The main difference is the set of operations that can be performed on them. Numpy arrays are oriented towards computation.
+NumPy extends the Python language by providing new types (array, matrix, masked_array...), functions and methods to realise efficient numerical calculation using Python. [NumPy](https://www.numpy.org) is _the_ numerical library for Python. It is too big to be covered in one day, so today we will learn a few of the basic objects and functions.
 
-In this lesson we are going to learn a little more about how to use this fundamental library to do any numerical analysis in Python.
-
-Numpy extends the Python language by providing new types (array, matrix, masked_array...), functions and methods to realise efficient numerical calculation using Python.
-
-As we saw in the Introduction course, the most basic numpy type is called an array. The most basic array is a multi-dimensional object which contains numerical data.
-
-[Numpy](https://www.numpy.org) is _the_ numerical library for Python. It is too big to be covered in one day, so today we will learn a few of the basic objects and functions.
-
-Numpy is a foundation block for all other python libraries used in science and data science, e.g.:
+Numpy is a foundation block for many other python libraries used in science and data science, e.g.:
 - [scipy](https://www.scipy.org) Fundamental library for scientific computing (interation, optimisation...)
 - [pandas](https://pandas.pydata.org) data structure and data analysis tools
 - [matplotlib](https://matplotlib.org) Python 2D plotting
@@ -39,6 +31,8 @@ And more specialised libraries such as:
 
 We are going to learn some of the basic commands not seen in the first course. We will introduce some of these libraries but keep in mind that we are just covering the basics so you can understand how to start using this library. If you find that your interest is piqued and/or they are applicable to your problem, you can use the documentation to learn more.
 
+The *array* is the central object of NumPy. It is a multi-dimensional object which contains numerical data. The main difference between NumPy arrays and Python lists is the set of operations that can be performed on them. In this lesson we are going to learn a little more about how to use this fundamental library to do any numerical analysis in Python.
+
 To start, we are going to import the two libraries `numpy` and `matplotlib` that will be used in this episode.
 
 ~~~
@@ -48,40 +42,40 @@ import matplotlib.pylab as plt
 {: .language-python}
 Here we import the libraries using a common shorthand for them, `np` for `numpy`, and `plt` for `matplotlib.pylab`. You will encounter this in many python scripts using these libraries, and we will continue to use these shorthands below.
 
-Numpy has a number of functions which behave similar to basic python functions. For example, to create a `list` of odd numbers from 1 to 9 we would use `range` and `list`:
+If we wanted to create a *list* of odd numbers in base Python we would use `range` and `list`:
 ~~~
-odds = list(range(1,10,2))
-print('odds is type {}, and contains {}'.format(type(odds),odds))
+odds = list(range(1, 10, 2))
+print('odds is type {}, and contains {}'.format(type(odds), odds))
 ~~~
 {: .language-python}
 ~~~
 odds is type <class 'list'>, and contains [1, 3, 5, 7, 9]
 ~~~
 {: .output}
-To create a numpy array we can use `np.arange`:
+To create the same list as a NumPy array we can use the `np.arange` function:
 ~~~
-odds_np = np.arange(1,10,2)
-print('odds_np is type {}, and contains {}'.format(type(odds_np),odds_np))
+odds_np = np.arange(1, 10, 2)
+print('odds_np is type {}, and contains {}'.format(type(odds_np), odds_np))
 ~~~
 {: .language-python}
 ~~~
 odds_np is type <class 'numpy.ndarray'>, and contains [1 3 5 7 9]
 ~~~
-Note that we did not need to convert the output of `np.arange`, as we did for the output of `range`, because `np.arange` returns directly a numpy array, rather than returning an iterator.
+Note that we did not need to convert the output of `np.arange`, as we did for the output of `range`, because `np.arange` returns a NumPy array directly, rather than returning a range object.
 
-> ## Numpy Array Addition
+> ## NumPy Array Addition
 >
-> What is the difference between addition of numpy arrays and lists? What is the result
+> What is the difference between addition of NumPy arrays and lists? What is the result
 > of these two additions?
 > ~~~
 > odds + odds
 > odds_np + odds_np
 > ~~~
 > {: .language-python}
-> 1. `[1,3,5,7,9,1,3,5,7,9]` for both
-> 2. `[1,3,5,7,9,1,3,5,7,9]` for odds, and `[2,6,10,14,18]` for odds_np
-> 3. `[2,6,10,14,18]` for odds, and `[1,3,5,7,9,1,3,5,7,9]` for odds_np
-> 4. `[2,6,10,14,18]` for both
+> 1. `[1, 3, 5, 7, 9, 1, 3, 5, 7, 9]` for both
+> 2. `[1, 3, 5, 7, 9, 1, 3, 5, 7, 9]` for odds, and `[2, 6, 10, 14, 18]` for odds_np
+> 3. `[2, 6, 10, 14, 18]` for odds, and `[1, 3, 5, 7, 9, 1, 3, 5, 7, 9]` for odds_np
+> 4. `[2, 6, 10, 14, 18]` for both
 >
 > > ## Solution
 > > The correct answer is (2)
@@ -90,10 +84,10 @@ Note that we did not need to convert the output of `np.arange`, as we did for th
 
 ### Reshaping Numpy Arrays
 
-Numpy arrays are multidimensional objects for storing data (not necessarily numerical). The shape of the array can be modified using the method `reshape`:
+NumPy arrays are multidimensional objects for storing data (not necessarily numerical). The shape of the array can be modified using the method `reshape`:
 ~~~
-arr = np.arange(1,18,2)
-arr_2d = arr.reshape((3,3))
+arr = np.arange(1, 18, 2)
+arr_2d = arr.reshape((3, 3))
 print('arr has shape {}, and contains:'.format(arr.shape))
 print(arr)
 print('arr_2d has shape {}, and contains:'.format(arr_2d.shape))
@@ -123,9 +117,9 @@ float64
 ~~~
 {: .output}
 
-### Working with Matricies
+### Working with Matrices
 
-Numpy arrays are not matrix objects, but numpy does provide a matrix object, which has the characteristics of a mathematical matrix:
+NumPy arrays are not matrix objects, but NumPy does provide a matrix object, which has the characteristics of a mathematical matrix:
 ~~~
 mat = np.matrix(arr_2d)
 type(mat)
@@ -150,9 +144,9 @@ matrix([[ 87., 105., 123.],
 
 ## Masked Arrays
 
-A very useful tool that numpy provides for working with experimental data is the masked array. When you are taking data from an experiment you always have some data which are not present, or with a bad signal to noise ratio, or that you cannot use for some other reason. This function allows you to select which data you wish to work with within your dataset.
+A very useful tool that NumPy provides for working with experimental data is the masked array. When you are taking data from an experiment you always have some data which are not present, or with a bad signal to noise ratio, or that you cannot use for some other reason. This function allows you to select which data you wish to work with within your dataset.
 
-Masked arrays associate a numpy array with another array composed only of boolean values (True or False). These tell numpy whether to use (or not) the respective element.
+Masked arrays associate a NumPy array with another array composed only of boolean values (True or False). These tell NumPy whether to use (or not) the respective element.
 
 To demonstrate this we are going to create a Gaussian function and use it to generate an example dataset and generate a plot. We will then add some noise to it and use a masked array to filter out the noisy data. This represents the kind of processing that can be used for datasets such as a seismographs, where we would wish to isolate single events from noisy background data.
 
@@ -164,7 +158,7 @@ Reminder: the Gaussian function is define by:
 > **x**, **µ**, and **σ**,
 > as defined above. (x is an array, µ is the position of the centre of the
 > curve/peak and σ is the width of the bell)
-> 2. Create a numpy array using the 'numpy' function 'linspace' which will contain 1000
+> 2. Create a NumPy array using the 'numpy' function 'linspace' which will contain 1000
 > points equally spaced between x=-100 and x=100. Hint: You can print the help
 > documentation of a function with 'help(name_of_the_function)'
 > 3. Using the above gauss function and the array, create a list which contains the value
@@ -174,8 +168,8 @@ Reminder: the Gaussian function is define by:
 > > ## challenge 1:
 > > ~~~
 > > def gauss(x, mu=0, sigma=1):
-> >     return (1./(sigma * np.sqrt(2 * np.pi)) *
-> >             np.exp( - (x - mu)**2 / (2 * sigma**2)))
+> >     return (1. / (sigma * np.sqrt(2 * np.pi)) *
+> >             np.exp( - (x - mu) ** 2 / (2 * sigma ** 2)))
 > > ~~~
 > > {: .language-python}
 > {: .solution}
@@ -190,7 +184,7 @@ Reminder: the Gaussian function is define by:
 > > ## challenge 3:
 > > ~~~
 > > mu = 0   # the position of the center of the peak
-> > sigma = 10  # # The width of the 'bell'
+> > sigma = 10  # The width of the 'bell'
 > > g = gauss(x, mu, sigma)
 > > ~~~
 > > {: .language-python}
@@ -210,9 +204,9 @@ Reminder: the Gaussian function is define by:
 
 ## Noisy Signal
 
-Now we are going to add some random noise to that curve. To do it we can use the numpy function `normal` from the module `random` provided by numpy library. We will scale the magnitude of the noise so it is (roughly) a 10th of the magnitude of the gaussian maximum:
+Now we are going to add some random noise to that curve. To do it we can use the NumPy function `normal` from the module `random` provided by NumPy library. We will scale the magnitude of the noise so it is (roughly) a 10th of the magnitude of the Gaussian maximum:
 ~~~
-noisy = np.random.normal(g, scale=g.max()/10)
+noisy = np.random.normal(g, scale=g.max() / 10)
 plt.plot(x, noisy)
 plt.show()
 ~~~
@@ -234,14 +228,14 @@ mean value is: 0.005047252119578472
 ~~~
 {: .output}
 
-We will create a mask for the data, by selecting all datapoints below this threshold value (we'll assume here that any signal we might be interested in is positive):
+We will create a mask for the data, by selecting all data points below this threshold value (we'll assume here that any signal we might be interested in is positive):
 ~~~
 mask = noisy < (stddev_noisy + mean_noisy)
 ~~~
 {: .language-python}
 This creates an array of boolean values, the same shape as our original data, with `True` values where the conditional statement has been met.
 
-The mask and noisy data can now be combined using the `array` function of the numpy masked arrays module (`np.ma`). Any `True` value in the mask will exclude the corresponding element from subsequent computation or plotting:
+The mask and noisy data can now be combined using the `array` function of the NumPy masked arrays module (`np.ma`). Any `True` value in the mask will exclude the corresponding element from subsequent computation or plotting:
 ~~~
 noisy_ma = np.ma.array(noisy, mask=mask)
 plt.plot(noisy_ma)
@@ -278,7 +272,7 @@ im1 = pyfits.open('data/502nmos.fits')
 
 > ## Memory management for large files
 > By default pyfits opens a file with the option `memmap=True`. This option opens the fits
-> file withou copying the data into memory and allows us to open very large files which
+> file without copying the data into memory and allows us to open very large files which
 > will not fit into physical memory.
 {: .callout}
 
@@ -329,7 +323,7 @@ type(imdata)
 <class 'numpy.ndarray'>
 ~~~
 {: .output}
-Note that this data is in the form of a numpy array, and so we can use our standard numpy tools for processing and displaying this data.
+Note that this data is in the form of a NumPy array, and so we can use our standard NumPy tools for processing and displaying this data.
 
 To start with we will look at the unprocessed image of the nebulae:
 ~~~
@@ -343,7 +337,7 @@ As is common for astronomical images, it is difficult to see anything on this im
 
 To improve the visible output we will carry out some simple analysis of the image, so that we can solve this contrast problem.
 
-First we examine the general stats of the data (using built-in methods, except for the median, which has to be called from numpy directly):
+First we examine the general stats of the data (using built-in methods, except for the median, which has to be called from NumPy directly):
 ~~~
 print('mean value im1:', imdata.mean())
 print('median value im1:', np.median(imdata))
@@ -480,20 +474,3 @@ Masked median: 6.725283622741699
 {: .challenge}
 
 {% include links.md %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
