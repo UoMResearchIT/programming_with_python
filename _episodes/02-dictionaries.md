@@ -291,7 +291,7 @@ TypeError: 'dict_keys' object is not subscriptable
 
 If you want to index keys or values directly, you can convert them to lists with the `list` function.
 ~~~
-d.values()[0]
+list(d.values())[0]
 ~~~
 {: .language-python}
 ~~~

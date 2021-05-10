@@ -22,7 +22,7 @@ This course follows on from the python introduction course. To ensure that we ar
 We wish to store the string `Cat` as a value in the variable `animal`, which of these lines of code will do this for us?
 1. `animal = 'Cat'`
 2. `animal = Cat`
-3. `animal = Cat`
+3. `Cat = animal`
 4. `animal(Cat)`
 
 > ## Solution
@@ -52,10 +52,10 @@ Lists and strings both contain multiple indexed values (in the case of strings t
 
 ### 3b. Indexing characters in a string (slicing)
 We can also select whole sections of lists and strings, not just single elements. Using the same variable `animal`, containing the string `penguin`, as above, which of these options will print the last 2 characters for us? (Note that there is more an one correct answer)
-1. `print(animal[3:])`
-2. `print(animal[4:])`
-2. `print(animal[4:5])`
-3. `print(animal[3:5])`
+1. `print(animal[5:])`
+2. `print(animal[6:])`
+2. `print(animal[6:7])`
+3. `print(animal[5:7])`
 4. `print(animal[-2:])`
 5. `print(animal[:-2])`
 
