@@ -6,19 +6,19 @@ questions:
 - "How do I select data within tables for processing?"
 - "How can I load different data formats?"
 objectives:
-- "Learn about numpy matrix objects"
+- "Learn about NumPy matrix objects"
 - "Learn about masking datasets"
 - "Learn about specialised data formats, and how to use them"
 keypoints:
-- "Numpy arrays are not matrix objects"
+- "NumPy arrays are not matrix objects"
 - "Array masks can be created using conditional statements"
-- "Numpy arrays can be masked to hide data you don't want to include in an analysis"
-- "Numpy libraries are available for reading a lot of different file formats"
+- "NumPy arrays can be masked to hide data you don't want to include in an analysis"
+- "NumPy libraries are available for reading a lot of different file formats"
 ---
 
 NumPy extends the Python language by providing new types (array, matrix, masked_array...), functions and methods to realise efficient numerical calculation using Python. [NumPy](https://www.numpy.org) is _the_ numerical library for Python. It is too big to be covered in one day, so today we will learn a few of the basic objects and functions.
 
-Numpy is a foundation block for many other python libraries used in science and data science, e.g.:
+NumPy is a foundation block for many other python libraries used in science and data science, e.g.:
 - [scipy](https://www.scipy.org) Fundamental library for scientific computing (interation, optimisation...)
 - [pandas](https://pandas.pydata.org) data structure and data analysis tools
 - [matplotlib](https://matplotlib.org) Python 2D plotting
@@ -32,6 +32,8 @@ And more specialised libraries such as:
 We are going to learn some of the basic commands not seen in the first course. We will introduce some of these libraries but keep in mind that we are just covering the basics so you can understand how to start using this library. If you find that your interest is piqued and/or they are applicable to your problem, you can use the documentation to learn more.
 
 The *array* is the central object of NumPy. It is a multi-dimensional object which contains numerical data. The main difference between NumPy arrays and Python lists is the set of operations that can be performed on them. In this lesson we are going to learn a little more about how to use this fundamental library to do any numerical analysis in Python.
+
+NumPy arrays are good for arrays of numerical data where each dimension is of a consistent size. Where you want to work with heterogeneous data and performance is not a problem, working with Python lists and dictionaries is easier than working with uneven datasets in NumPy. Similarly, while NumPy arrays do technically support having different data types in different columns, it is awkward to do and breaks a lot of the useful NumPy methods. It is best to use libraries for the specific purpose for which they are designed, so any sort of tabular data is better handled with something like Pandas. 
 
 To start, we are going to import the two libraries `numpy` and `matplotlib` that will be used in this episode.
 
@@ -82,7 +84,7 @@ Note that we did not need to convert the output of `np.arange`, as we did for th
 > {: .solution}
 {: .challenge}
 
-### Reshaping Numpy Arrays
+### Reshaping NumPy Arrays
 
 NumPy arrays are multidimensional objects for storing data (not necessarily numerical). The shape of the array can be modified using the method `reshape`:
 ~~~
@@ -150,7 +152,7 @@ Masked arrays associate a NumPy array with another array composed only of boolea
 
 To demonstrate this we are going to create a Gaussian function and use it to generate an example dataset and generate a plot. We will then add some noise to it and use a masked array to filter out the noisy data. This represents the kind of processing that can be used for datasets such as a seismographs, where we would wish to isolate single events from noisy background data.
 
-Reminder: the Gaussian function is define by:
+Reminder: the Gaussian function is defined by:
 ![Gaussian function equation.](../fig/gauss_function.png)
 
 > ## Gaussian Function
@@ -248,7 +250,7 @@ plt.show()
 
 We are going to learn some commands that deal with images. Since most scientific domains use their own file format, we obviously can not learn all of them. We will use a typical astronomical image format: the 'fits' file.
 
-In the data directory you should find a file called 502nmos.fits.
+In the data directory you should find a file called `502nmos.fits`.
 
 We can verify that the file is indeed here:
 
@@ -379,7 +381,7 @@ plt.ylabel('Pixel Count')
 {: .language-python}
 ![Histogram showing photon count, with a log scale showing the long tail of high values.](../fig/photon_count_b.png)
 
-While almost all pixels have a photon count of zero (or near zero), only a few (<1000) photon counts are above 100. There does appear to be a significant number of pixels with values between these two extremes though, so we will constrain the range of our x-axis to between the limits of 1 and 30, to better see these data. The limit of 30 is obtained through previous analysis - if you were carrying out this investigation of the data yourself you would use trail and error to find the best cut-off point for this plot.
+While almost all pixels have a photon count of zero (or near zero), only a few (<1000) photon counts are above 100. There does appear to be a significant number of pixels with values between these two extremes though, so we will constrain the range of our x-axis to between the limits of 1 and 30, to better see these data. The limit of 30 is obtained through previous analysis - if you were carrying out this investigation of the data yourself you would use trial and error to find the best cut-off point for this plot.
 ~~~
 hist = plt.hist(imdata.ravel(), bins=100, range=(1,30))
 plt.xlabel('Number of Photons')
@@ -414,7 +416,7 @@ plt.imshow(immasked.mask, cmap='gray', origin='lower')
 {: .language-python}
 ![Nebulae mask image in greyscale, with a photon count limit of 25. A black background, with a few bright dots where the limit is exceeded.](../fig/nebulae_25mask.png)
 
-This mask is applied to the data for all built-in functions. But where we have to directly use a numpy function we have to make sure we use the equivalent function in the mask (`ma`) library:
+This mask is applied to the data for all built-in functions. But where we have to directly use a NumPy function we have to make sure we use the equivalent function in the mask (`ma`) library:
 ~~~
 print('original average:', imdata.mean())
 print('Masked average:', immasked.mean())
