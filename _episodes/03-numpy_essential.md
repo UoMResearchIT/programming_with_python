@@ -45,7 +45,7 @@ Here we import the libraries using a common shorthand for them, `np` for `numpy`
 If we wanted to create a *list* of odd numbers in base Python we would use `range` and `list`:
 ~~~
 odds = list(range(1, 10, 2))
-print('odds is type {}, and contains {}'.format(type(odds), odds))
+print(f'odds is type {type(odds)}, and contains {odds}')
 ~~~
 {: .language-python}
 ~~~
@@ -55,7 +55,7 @@ odds is type <class 'list'>, and contains [1, 3, 5, 7, 9]
 To create the same list as a NumPy array we can use the `np.arange` function:
 ~~~
 odds_np = np.arange(1, 10, 2)
-print('odds_np is type {}, and contains {}'.format(type(odds_np), odds_np))
+print(f'odds_np is type {type(odds_np)}, and contains {odds_np}')
 ~~~
 {: .language-python}
 ~~~
@@ -88,9 +88,9 @@ NumPy arrays are multidimensional objects for storing data (not necessarily nume
 ~~~
 arr = np.arange(1, 18, 2)
 arr_2d = arr.reshape((3, 3))
-print('arr has shape {}, and contains:'.format(arr.shape))
+print(f'arr has shape {arr.shape}, and contains:')
 print(arr)
-print('arr_2d has shape {}, and contains:'.format(arr_2d.shape))
+print(f'arr_2d has shape {arr2d.shape}, and contains:')
 print(arr_2d)
 ~~~
 {: .language-python}
@@ -218,8 +218,8 @@ To identify any signal in the data we can use the standard deviation as an estim
 ~~~
 stddev_noisy = np.std(noisy)
 mean_noisy = np.mean(noisy)
-print('standard deviation is: {}'.format(stddev_noisy))
-print('mean value is: {}'.format(mean_noisy))
+print(f'standard deviation is: {stddev_noisy}')
+print(f'mean value is: {mean_noisy}')
 ~~~
 {: .language-python}
 ~~~

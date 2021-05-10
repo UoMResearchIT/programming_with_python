@@ -425,7 +425,7 @@ The `id` contains the DOI that we used to find this entry, while the `attributes
 > > ## solution
 > > ~~~
 > > def doi_title( doi_string ):
-> >     source_url = 'https://api.datacite.org/dois/{}'.format(doi_string)
+> >     source_url = f'https://api.datacite.org/dois/{doi_string}'
 > >     response = requests.get(source_url)
 > >     record = response.json()
 > >     return(record['data']['attributes']['titles'][0]['title'])
