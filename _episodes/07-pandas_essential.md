@@ -3,11 +3,19 @@ title: "Pandas Essential"
 teaching: 0
 exercises: 0
 questions:
-- "Ho can I work with spreadsheet style datasets?"
+- "How can I work with spreadsheet style datasets?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Learn to load csv data, and obtain simple analysis of the data"
+- "Learn how to index data arrays using column/row labels"
+- "Learn how to mask data to remove unwanted values"
+- "Learn how to plot data directly from pandas"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "CSV data is loaded using the `load_csv()` function"
+- "The `describe()` function gives a quick analysis of the data"
+- "`loc[<index>,<column>]` indexes the data array by the index and column labels"
+- "`iloc[<index>,<column>]` indexes the data array using numerical indicies"
+- "The data can be sliced by providing index and/or column indicies as ranges or lists of values"
+- "The built-in `plot()` function can be used to plot the data using the `matplotlib` library"
 ---
 
 This library is again based on the numpy library that we discuss in a previous lesson. It provides python with a new object which allows us to work with "relational" or "labeled" data in an easy way. It provides a similar access to data coming from Database or Spreadsheet as the one that you can find in languages like R.
@@ -247,6 +255,12 @@ plt.ylabel('GDP per capita')
 > dataframe. Which of these commands is correct:
 > 1. `gdpPercap.columns = data.columns.str.strip('gdpPercap_')`
 > 2. `gdpPercap = data.columns.str.strip('gdpPercap_')`
+>
+> > ## Solution
+> > The correct answer is 1. We have to pass the new column labels explicitly back to the
+> > array columns, otherwise all we do is replace the data array with a list of the new
+> > column labels.
+> {: .solution}
 {: .challenge}
 
 
@@ -264,8 +278,17 @@ plt.ylabel('GDP per capita')
 > {: .language-python}
 >
 > Which of the following blocks of code should replace the `<BLOCK>` in the code above?
-> 1. `.loc[['Sweden','Iceland'],:]`
+> 1. `.loc['Sweden':'Iceland',:]`
+> 2. `.loc[:,['Sweden','Iceland']]`
+> 3. `.loc[['Sweden','Iceland'],:]`
+> 4. `.loc[:,'Sweden':'Iceland']`
 >
+> > ## Solution
+> > The correct answer is 3. The two countries are not adjacent in the dataset, so we need
+> > to use a list to slice them, not a range (disqualifying answers 1 and 4). We have also
+> > transposed the dataset (using `.T`), so the country names are now index, not column,
+> > labels, and need to be referenced first (disqualifying answers 2 and 4).
+> {: .solution}
 {: .challenge}
 
 
