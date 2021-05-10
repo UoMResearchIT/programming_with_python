@@ -111,7 +111,7 @@ d = {'keyname': 'keyvalue'}
 ~~~
 {: .language-python}
 
-Following the previous example, we can create a hash table, a python dictionary, using the name of the person as *key* and the age as *value*:
+Following the previous example, we can create a python dictionary using the name of a person as the *key* and their age as the *value*:
 ~~~
 d = {'alice': 35, 'bob': 18}
 ~~~
@@ -127,7 +127,7 @@ print(d)
 ~~~
 {: .output}
 
-Alternatively, a dictionary object can be created using the `dict` function, in a similar manner to using the `list` function. In this case, however, we need to indicate which *key* is associated with which *value*. This can be done with tuples:
+Alternatively, a dictionary object can be created using the `dict` function, in a similar manner to using the `list` function. When using the `dict` function we need to indicate which *key* is associated with which *value*. This can be done in a number of ways, firstly with tuples:
 ~~~
 d2 = dict([('alice', 35), ('jane', 24), ('bob',18)])
 ~~~
@@ -137,7 +137,7 @@ or with direct association:
 d3 = dict(bob=18, alice=35, jane=24)
 ~~~
 {: .language-python}
-or using the special `zip` method, which can be used to create a set of tuples from the given iterable lists:
+or using the special `zip` function, which can be used to create a set of tuples from the given iterable lists:
 ~~~
 d4 = dict(zip(['jane','alice','bob'],[24,35,18]))
 ~~~
@@ -164,7 +164,7 @@ Adding an element to a dictionary is done by creating a new key and attaching a 
 
 ~~~
 print('Original dictionary:', d)
-d['jane']=24
+d['jane'] = 24
 print('New dictionary:', d)
 ~~~
 {: .language-python}
@@ -207,11 +207,11 @@ Updated dictionary: {'alice': 35, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 {: .callout}
 
 > ## Key Uniqueness Warning
-> Key have to be unique; you cannot have two keys with the same name. If you try to add a > key with a name already used you will overwrite the value of the previous one.
+> Keys have to be unique; you cannot have two keys with the same name. If you try to add an item using a key already present in the dictionary you will overwrite the previous value.
 >
 > ~~~
 > print('Original dictionary:', d)
-> d['alice']=12
+> d['alice'] = 12
 > print('New dictionary:', d)
 > ~~~
 > {: .language-python}
@@ -224,7 +224,7 @@ Updated dictionary: {'alice': 35, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 
 ## Equality between dictionaries
 
-To be equal, all the elements which compose the first dictionay must be present in the second, and only those elements.
+To be equal, all the elements which compose the first dictionary must be present in the second, and only those elements.
 
 The position (ordering) is not important.
 
@@ -233,14 +233,14 @@ d1 = {'alice': 12, 'bob': 18, 'jane': 24, 'tom': 54, 'david': 87}
 d2 = {'tom': 54, 'david': 87}
 d3 = {'bob': 18, 'alice': 35, 'jane': 24}
 d4 = {'alice': 35, 'bob': 18, 'jane': 24}
-print('Dictionary 1 and dictionary 2 are not equal:', d1 == d2)
-print('Dictionary 1 and dictionary 3 are not equal:', d1 == d3)
+print('Dictionary 1 and dictionary 2 are equal:', d1 == d2)
+print('Dictionary 1 and dictionary 3 are equal:', d1 == d3)
 print('Dictionary 3 and dictionary 4 are equal:', d3 == d4)
 ~~~
 {: .language-python}
 ~~~
-Dictionary 1 and dictionary 2 are not equal: False
-Dictionary 1 and dictionary 3 are not equal: False
+Dictionary 1 and dictionary 2 are equal: False
+Dictionary 1 and dictionary 3 are equal: False
 Dictionary 3 and dictionary 4 are equal: True
 ~~~
 {: .output}
@@ -310,22 +310,21 @@ True
 
 ## JSON files
 
-Because JSON files are such an intrinsic part of the internet, python has a built in package for supporting the reading of these. This is loaded using:
+Because JSON files are such a widely used format, python has a built in package for working with JSON, called `json`:
 ~~~
-import glob
 import json
+import glob
 
 filenames = sorted(glob.glob('*.json'))
 
-jobjects = {}
+j_objects = {}
 for filename in filenames:
     with open(filename) as f:
-        jobjects[filename] = json.loads(f.read())
+        j_objects[filename] = json.loads(f.read())
 ~~~
 {: .language-python}
 
-The `f.read` function reads the file as a single string, which the `json.loads()` function then turns into a dictionary, following the `json` standard.
-
+The `f.read` method reads the file as a single string, which the `json.loads()` method then turns into a dictionary, following the JSON standard.
 
 
 ## HTTP requests
@@ -446,11 +445,11 @@ We use the built-in `%timeit` function, to test the speed of these searches:
 
 Note that the increase in search time is (very roughly) linear.
 
-This is a real problem because the membership test is a very useful and common procedure. So we would like to have something which is not dependent of the number of elements.
+This is a real problem because the membership test is a very useful and common procedure. So we would like to have something which is not dependent on the number of elements.
 
 
 > ## Testing access time for large dictionaries
-> Please create two dictionaries, one with 100,000 key:value pairs, the other with
+> Create two dictionaries, one with 100,000 key:value pairs, the other with
 > 1,000,000 key:value pairs, using the lists created at the start of this lesson. Then
 > use these to test the access times for dictionaries using the `%timeit` function.
 > How do the access times compare with those for the lists, are they quicker or slower,
