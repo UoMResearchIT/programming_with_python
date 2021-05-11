@@ -19,11 +19,11 @@ This course follows on from the python introduction course. To ensure that we ar
 ## Variables and Lists
 
 ### 1. Assigning a value to a variable
-We wish to store the string `value` as a value in the variable `variable`, which of these lines of code will do this for us?
-1. `variable = 'value'`
-2. `variable = value`
-3. `value = variable`
-4. `variable(value)`
+We wish to store the string `Cat` as a value in the variable `animal`, which of these lines of code will do this for us?
+1. `animal = 'Cat'`
+2. `animal = Cat`
+3. `Cat = animal`
+4. `animal(Cat)`
 
 > ## Solution
 > Answer 1 is correct
@@ -40,10 +40,10 @@ We wish to create a list of values, which of these lines of code is valid to do 
 {: .solution}
 
 ### 3a. Indexing characters in a string
-Lists and strings both contain multiple indexed values (in the case of strings these are specifically individual characters rather than other values). If we have a variable `variable` which contains the string `value`, which of these options will print the first character (`v`) for us?
-1. `print(variable[0])`
-2. `print(variable[1])`
-2. `print(variable['v'])`
+Lists and strings both contain multiple indexed values (in the case of strings these are specifically individual characters rather than other values). If we have a variable `animal` which contains the string `penguin`, which of these options will print the first character (`p`) for us?
+1. `print(animal[0])`
+2. `print(animal[1])`
+2. `print(animal['p'])`
 
 > ## Solution
 > Answer 1 is correct
@@ -51,13 +51,13 @@ Lists and strings both contain multiple indexed values (in the case of strings t
 
 
 ### 3b. Indexing characters in a string (slicing)
-We can also select whole sections of lists and strings, not just single elements. Using the same variable `variable`, containing the string `value`, as above, which of these options will print the last 2 characters for us? (Note that there is more an one correct answer)
-1. `print(variable[3:])`
-2. `print(variable[4:])`
-2. `print(variable[4:5])`
-3. `print(variable[3:5])`
-4. `print(variable[-2:])`
-5. `print(variable[:-2])`
+We can also select whole sections of lists and strings, not just single elements. Using the same variable `animal`, containing the string `penguin`, as above, which of these options will print the last 2 characters for us? (Note that there is more an one correct answer)
+1. `print(animal[5:])`
+2. `print(animal[6:])`
+2. `print(animal[6:7])`
+3. `print(animal[5:7])`
+4. `print(animal[-2:])`
+5. `print(animal[:-2])`
 
 > ## Solution
 > Answers 1, 3, and 4 are correct
@@ -67,11 +67,11 @@ We can also select whole sections of lists and strings, not just single elements
 ## Loops
 
 ### 4. Constructing a `for` loop
-Please write a simple `for` loop which will print out each of the characters in the `variable` variable one at a time.
+Please write a simple `for` loop which will print out each of the characters in the `animal` variable one at a time.
 
 > ## Solution
 > ~~~
-> for char in variable:
+> for char in animal:
 >     print(char)
 > ~~~
 > {: .language-bash}
@@ -100,7 +100,7 @@ Which of these conditional tests returns a `True` result?
 5. `3 > 'c'`
 
 > ## Solution
-> Answers 1, 2, and 3 return `True` results. 4 returns `False`. 5 returns an Error.
+> Answers 1, 2, and 3 return `True` results. 4 returns `False`. 5 raises an Error.
 {: .solution}
 
 ### 7. If statements
