@@ -20,7 +20,7 @@ and in [Anaconda documentation][anaconda-install].
 
 ## Obtain lesson materials
 
-1. Download [python-intermediate-data.zip](../data/python-intermediate-data.zip)
+1. Download [python-intermediate-data.zip](./data/python-intermediate-data.zip)
 2. Create a folder called `swc-python` on your Desktop.
 3. Move downloaded file to `swc-python`.
 4. Unzip the file.
