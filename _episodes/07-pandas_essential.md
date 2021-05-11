@@ -276,13 +276,10 @@ plt.ylabel('GDP per capita')
 > {: .language-python}
 >
 > Which of the following blocks of code should replace the `<BLOCK>` in the code above?
-> 1. `.loc['Sweden':'Iceland',:]`
-> 2. `.loc[:,['Sweden','Iceland']]`
-> 3. `.loc[['Sweden','Iceland'],:]`
-> 4. `.loc[:,'Sweden':'Iceland']`
-
-Are you still including the `...from 1972 onwards.` criteria, if so the answer would be:
-> 5. .loc[['Sweden','Iceland'],'gdpPercap_1972':]
+> 1. `.loc['Sweden':'Iceland','gdpPercap_1972':]`
+> 2. `.loc['gdpPercap_1972':,['Sweden','Iceland']]`
+> 3. `.loc[['Sweden','Iceland'],'gdpPercap_1972':]`
+> 4. `.loc['gdpPercap_1972':,'Sweden':'Iceland']`
 >
 > > ## Solution
 > > The correct answer is 3. The two countries are not adjacent in the dataset, so we need
