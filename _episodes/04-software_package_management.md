@@ -22,15 +22,15 @@ keypoints:
 
 Virtual environments are a useful tool for isolating and managing the software packages you use. Doing this enables you to track the packages you use for your work (enabling you to create reproducable environments, so that others can also use your code). It also allows you to use packages which might have conflicting requirements (or even different versions of the same package) without the hassle of haveing to install and uninstall these each time.
 
-Python has a built in tools for managing virtual environments ([venv](https://docs.python.org/3/tutorial/venv.html)) and packages (pip). However we will not cover these tools today, While venv and pip are very useful for managing pure python packages, often we want to use packages which are built on other languages (or, even, are do not use python at all), and they are not very flexible in such a situation. Another tool, conda, has been built to extend their functionality to cover these mixed-language packages, for a wide range of computing platforms, and it is this which what we will cover today.
+Python has a built in tools for managing virtual environments ([venv](https://docs.python.org/3/tutorial/venv.html)) and packages (pip). However we will not cover these tools today, While venv and pip are very useful for managing pure python packages, they are not very flexible when we want to use packages which are built on other languages (or perhaps do not use python at all). Another tool, conda, has been built to extend their functionality to cover these mixed-language packages, for a wide range of computing platforms, and it is this which we will cover today.
 
-The lesson below is not conducted in a python interpreter, but instead in the unix shell. When you are asked to type in code below, please do this in a terminal window, not in this browser.
+The lesson below is not conducted using a python interpreter, but instead using the unix shell. When you are asked to type in code below, please do this in a terminal window and not in this browser.
 
 ## Installing Conda
 
 The conda package manager is available to install by itself (using the miniconda installer), or with a preprepared set of commonly used packages and a graphical user-interface (GUI) for managing your packages (using the anaconda installer). Miniconda is a good choice if you have limited bandwidth or disk space, and are happy to install packages as you need them using the command line interface (CLI). Anaconda is a good choice if you have more disk space (it requires >3Gb) and want to use a GUI.
 
-We will not cover installation in this lession, but more information is available on both of these, as well as links for downloading the installers, is available here: [https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html).
+We will not cover installation in this lesson but more information is available on both of these conda installers, as well as links for downloading the installers, here: [https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html).
 
 ## Package Channels
 
@@ -42,7 +42,7 @@ conda config --show channels
 ~~~
 {: .language-bash}
 
-This will (likely) list these as:
+This will (likely) list the the following:
 ~~~
 channels:
   - conda-forge
@@ -50,7 +50,7 @@ channels:
 ~~~
 {: .output}
 
-The channel order is important for determining priority when installing packages - those from channels higher in the list will be given priority over those lower in the list. After this the newer versions of a package are given priority over older versions of a package (and then build numbers, for a given version). The order in which priority is determined can be changed, we won't cover this today, but more information can be found in the [conda managing channels](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/tasks/manage-channels.html) documentation.
+The channel order is important for determining priority when installing packages. Those from channels higher in the list will be given priority over those lower in the list. After this the newer versions of a package are given priority over older versions of a package (and then build numbers, for a given version). The order in which priority is determined can be changed, we won't cover this today, but more information can be found in the [conda managing channels](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/tasks/manage-channels.html) documentation.
 
 To add a channel we can use:
 ~~~
@@ -85,7 +85,7 @@ When we do this we should be warned the channel is already in the list, but it i
 
 ## Searching for Packages
 
-Once you've added the channels you wish to use, now you can search them for the software that you need. This is simply carried out using `conda search`. For example, if we wished to find out what versions of [Gromacs](https://www.gromacs.org/About_Gromacs) are available, we can use:
+Once you've added the channels you wish to use, you can now search them for the software that you need. This is simply carried out using `conda search`. For example, if we wished to find out what versions of [Gromacs](https://www.gromacs.org/About_Gromacs) are available, we can use:
 ~~~
 conda search gromacs
 ~~~
@@ -136,7 +136,7 @@ gromacs                       2021.1      hd895feb_0  bioconda
 {: .output}
 Note that we've put the search string in quotations, in order to ensure it is passed to conda correctly.
 
-We can also use wildcards in the version string, For example, if we wish to find all numpy packages with version 1.20:
+We can also use wildcards in the version string. For example, if we wish to find all numpy packages with version 1.20:
 ~~~
 conda search 'numpy==1.20.*'
 ~~~
@@ -163,7 +163,7 @@ numpy                         1.20.2  py38had91d27_0  conda-forge
 numpy                         1.20.2  py39h7eed0ac_0  conda-forge
 ~~~
 {: .output}
-Note that the build string now starts with `pyXX`, where `XX` indicates the version of python the package was built against. When conda packages are dependent on python then they usually will be built against a number of different versions of python - which gives more flexibility when trying to create an environment. Also note that two channels are listed here `pkgs/main` and `conda-forge`, which do duplicate some versions, but also note that `conda-forge` has the most recent version of the `numpy` software, whereas the default channel does not. `conda-forge` tends to be updated more frequently than the default channels.
+Note that the build string now starts with `pyXX`, where `XX` indicates the version of python the package was built against. When conda packages are dependent on python then they usually will be built against a number of different versions of python - which gives more flexibility when trying to create an environment. Also note that two channels are listed here, the default `pkgs/main` and `conda-forge`. These duplicate some versions, but also note that `conda-forge` has the most recent version of the `numpy` software, whereas the default channel does not. `conda-forge` tends to be updated more frequently than the default channels.
 
 
 
@@ -182,7 +182,7 @@ conda search perl*
 
 ## Creating Environments
 
-As the range and variety of software used increases, it is becoming very common for users to need to use a number of different software programs for their work which need access to different versions of the same software library. Or there will be conflicts between the operating system requirements (as these tend to change slowly, and be built on reliable software libraries) and the latest version of the software package you need. Usually installing all this software on the same system would be very difficult - but if we use virtual environments to separate these programs and their dependencies, then the task becomes a lot more simple.
+As the range and variety of software used increases, it is becoming very common for users require a number of different software programs for their work which need access to different versions of the same software library. In addition there could be conflicts between the operating system requirements (as these tend to change slowly, and be built on reliable software libraries) and the latest version of the required software package. Usually, installing all this software on the same system would be very difficult, but if we use virtual environments to separate these programs and their dependencies, then the task becomes a lot more simple.
 
 We will start with listing the current environments:
 ~~~
@@ -195,7 +195,7 @@ conda env list
 base                  *  /Users/mbessdl2/anaconda3
 ~~~
 {: .output}
-This shows you the environments you have installed, and the path where they are installed. In addition the `*` indicates which environment you currently have loaded.
+This shows you the environments you have installed, and the path where they are installed. In addition the `*` indicates which environment you currently have loaded. 
 
 You can list the packages you have installed in your current environment using:
 ~~~
@@ -222,8 +222,7 @@ zstd                      1.4.4                he7fca8b_1    conda-forge
 {: .output}
 
 
-
-A new conda environment can be created using the command:
+When you begin using conda, as you can see, you are given a default environment named `base`. Avoid installing programs into your base environment, it is better to create separate environments to keep your programs isolated from each other. A new conda environment can be created using the command:
 ~~~
 conda create --name myenv
 ~~~
@@ -273,7 +272,7 @@ Before we can use this software, we must activate the environment it is in. This
 conda activate myenv
 ~~~
 {: .language-bash}
-Once this done you should see the name of the environment you are using in brackets before your command prompt. And you will now be able to access the program:
+Once this done you should see the name of the environment you are using in brackets before your command prompt. (If you have used pip, this will be familiar.) And you will now be able to access the program:
 ~~~
 which spyder
 ~~~
@@ -387,14 +386,14 @@ dependencies:
 prefix: /Users/mbessdl2/anaconda3
 ~~~
 {: .output}
-This builds a list of only the packages that you explicitly requested installed in that environment. Where you have specified a particular version of a package, then this will be recorded, but otherwise the version number will be unconstrained. If you wish to constrain the version of a package (for example, if a certain feature you use has been removed in more recent versions of the package), then you will need to edit this information to specify that (using the information given by the standard `conda list` command).
+This builds a list of only the packages that you explicitly requested to be installed in that environment. Where you have specified a particular version of a package, then this will be recorded, but otherwise the version number will be unconstrained. If you wish to constrain the version of a package (for example, if a certain feature you use has been removed in more recent versions of the package), then you will need to edit this information to specify that (using the information given by the standard `conda list` command).
 
 To create a new environment from either of these YAML environment files, you can use the command:
 ~~~
 conda env create --file <env file> --name <env name>
 ~~~
 {: .language-bash}
-The name you give the environment does not have to be the same as that in the file, but if you don't give a name then the name in the file will be used.
+The name that you give the environment does not have to be the same as the name specified in the file, but if you don't explicitly specify a name then the name in the file will be used.
 
 
 {% include links.md %}
