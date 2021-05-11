@@ -13,11 +13,11 @@ keypoints:
 - "`assert` structures are useful for forcing errors early, to avoid wasted effort"
 ---
 
-In this episode we are going to learn a python structure which will help us to properly manage the errors that can be encountered when executing our code.
+In this episode we are going to learn about error handling, a python structure (also common in other programming languages) which will help us to properly manage the anomalies that can be encountered when executing our code.
 
-In science most developers write code for themselves and do not feel the need to use such tools. Nowadays scientists have to share their work more and funding agencies are starting to ask for the code used in published experiments.
+In science most developers write code for themselves and do not feel the need to use error handling. However, nowadays scientists have to share their work as more funding agencies are also asking for the code used in experiments to be published.
 
-Furthermore, applications are not expected to crash and we are going to learn how to avoid this non desirable behaviour.
+More importantly, applications are not expected to crash and we are going to learn how to avoid this non desirable behaviour.
 
 > ## What is the problem with this test?
 >
@@ -134,7 +134,7 @@ finally:
 ~~~
 {: .language-python}
 
-The typical use of the `finally` statement is dealing with the release of external resources (such as files or network connections) whether or not the attempted action has been successful.
+The typical use of the `finally` statement is to deal with the release of external resources (such as files or network connections) whether or not the attempted action has been successful.
 
 More details about errors and exceptions can be found in the [Python tutorials](https://docs.python.org/3/tutorial/errors.html).
 
@@ -166,7 +166,7 @@ More details about errors and exceptions can be found in the [Python tutorials](
 > ~~~
 > {: .output}
 >
-> Write a `try-except` structure that uses this error to deal with this error without crashing.
+> Write a `try-except` structure that uses `raise_for_status` and deals with the error without crashing.
 >
 > > ## Solution
 > > ~~~
@@ -193,7 +193,7 @@ More details about errors and exceptions can be found in the [Python tutorials](
 
 The `try-except` structure is useful for controlling small chunks of code, where we might reasonably expect that the user can fix the problem (where it is a program which takes a short time to run), or where our program itself will fix the problem (such as substituting NaN values for a failed calculation).
 
-Sometimes, however, it is better to check the data before it is passed into the code, and cause an early crash in the program, which will return a meaningful error. For example, this can be extremely useful in the case of large numerical calculations that take a long time to run and which will only use some of the provided variables after a significant amount of the computational work has already been carried out. In such situations your user will appreciate being warned early on that they have provided invalid data.
+Sometimes, however, it is better to check the data before it is passed into the code and to trigger an early crash in the program, which returns a meaningful error. For example, this can be extremely useful in the case of large numerical calculations that take a long time to run and which will only use some of the provided variables after a significant amount of the computational work has already been carried out. In such situations your user will appreciate being warned early on that they have provided invalid data.
 
 To conduct such a test we can use an `assert` statement. This follows the structure: `assert <test>, <error message>`. As an example of this, we can write the test for non-numerical values as:
 ~~~
@@ -219,7 +219,7 @@ AssertionError: Variable has to be a numerical object
 ~~~
 {: .output}
 
-Like the `if` statements this catches the problematic variable before it reaches our calculation. However it is far less intrusive code, and assert tests can be added in sequence, so that we can quickly and easily increase the coverage of the tests that make.
+Like the earlier `if` statement, this catches the problematic variable before it reaches our calculation. However it is far less intrusive code, and assert tests can be added in sequence, so that we can quickly and easily increase the coverage of such tests.
 
 
 > ## Testing for NaN's (Not a Number)

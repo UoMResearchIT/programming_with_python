@@ -5,7 +5,7 @@ exercises: 0
 questions:
 - "How can I work with spreadsheet style datasets?"
 objectives:
-- "Learn to load csv data, and obtain simple analysis of the data"
+- "Learn to load csv data, and obtain simple analyses of the data"
 - "Learn how to index data arrays using column/row labels"
 - "Learn how to mask data to remove unwanted values"
 - "Learn how to plot data directly from pandas"
@@ -18,11 +18,9 @@ keypoints:
 - "The built-in `plot()` function can be used to plot the data using the `matplotlib` library"
 ---
 
-This library is again based on the numpy library that we discuss in a previous lesson. It provides python with a new object which allows us to work with "relational" or "labeled" data in an easy way. It provides a similar access to data coming from Database or Spreadsheet as the one that you can find in languages like R.
+This library is based on the numpy library that we discuss in a previous lesson. It provides python users with a new object that allows us to work with "relational" or "labelled" data in an easy way. It provides similar access to data loaded from databases or spreadsheets as those found in languages like R.
 
-Pandas is designed more for datascience than pure numerical analysis but the tools can be combined together.
-
-The library is providing input/output tools with which it is possible to open/save data from MS Excel, CSV or HDF5 files.
+Pandas is designed more for data science than pure numerical analysis but the required tools can easily be combined together. In addition, the library provides input/output tools that allow the opening and saving of data from MS Excel, CSV or HDF5 files.
 
 The library is usually imported as `pd`:
 ~~~
@@ -36,7 +34,7 @@ import matplotlib.pyplot as plt
 ~~~
 {: .language-python}
 
-We will be working with data in the `data/gapminder_gdp_europe.csv` file - open this
+We will be working with data in the `data/gapminder_gdp_europe.csv` file. Open this
 with a text editor and look at the data layout.
 
 The data within this file is organised much as you'd expect the data within a spreadsheet.  The first row of the file contains the headers for each of the columns. The first column contains the name of the countries, while the remaining columns contain the GDP values for these countries for each year. Pandas has the `read_csv` function for reading structured data such as this, which makes reading the file easy:
@@ -46,7 +44,7 @@ data = pd.read_csv('data/gapminder_gdp_europe.csv',index_col='country')
 {: .language-python}
 Here we specify that the `country` column should be used as the index column (`index_col`).
 
-This creates a `DataFrame` object containing the dataset. This is similar to a numpy array, but has a number of significant differences to these objects. The first is that there are more ways to quickly understand a pandas dataframe. For example, the `info` function gives an overview of the data types and layout of the DataFrame:
+This creates a `DataFrame` object containing the dataset. This is similar to a numpy array, but has a number of significant differences. The first is that there are more ways to quickly understand a pandas dataframe. For example, the `info` function gives an overview of the data types and layout of the DataFrame:
 ~~~
 data.info()
 ~~~
@@ -154,7 +152,7 @@ Belgium     8343.105127    13149.041190    20979.845890    27561.196630
 
 ## Masking data
 
-Pandas data arrays are based on numpy arrays, and retain some of the numpy tools, such as masked arrays. This enables us to apply selection criteria to the datasets, so that only the values that we require are shown. For example, this selects all data where the GDP is above $10,000:
+Pandas data arrays are based on numpy arrays, and retain some of the numpy tools, such as masked arrays. This enables us to apply selection criteria to the datasets, so that only the values that we require are shown. For example, the following selects all data where the GDP is above $10,000:
 ~~~
 subset = data.loc['Italy':'Poland', 'gdpPercap_1962':'gdpPercap_1972']
 print(subset[subset>10000])
@@ -249,7 +247,7 @@ plt.ylabel('GDP per capita')
 > gdpPercap = data.copy(deep=True)
 > ~~~
 > {: .language-python}
-> This we have given a more appropriate name, replacing the information that will be removed from the column headers.
+> We have given this new dataframe a more appropriate name, replacing the information that will be removed from the column headers.
 >
 > Now we will use the inbuilt `str.strip` method to clean up our column labels for the new
 > dataframe. Which of these commands is correct:
@@ -278,16 +276,18 @@ plt.ylabel('GDP per capita')
 > {: .language-python}
 >
 > Which of the following blocks of code should replace the `<BLOCK>` in the code above?
-> 1. `.loc['Sweden':'Iceland',:]`
-> 2. `.loc[:,['Sweden','Iceland']]`
-> 3. `.loc[['Sweden','Iceland'],:]`
-> 4. `.loc[:,'Sweden':'Iceland']`
+> 1. `.loc['Sweden':'Iceland','gdpPercap_1972':]`
+> 2. `.loc['gdpPercap_1972':,['Sweden','Iceland']]`
+> 3. `.loc[['Sweden','Iceland'],'gdpPercap_1972':]`
+> 4. `.loc['gdpPercap_1972':,'Sweden':'Iceland']`
 >
 > > ## Solution
 > > The correct answer is 3. The two countries are not adjacent in the dataset, so we need
-> > to use a list to slice them, not a range (disqualifying answers 1 and 4). We have also
-> > transposed the dataset (using `.T`), so the country names are now index, not column,
-> > labels, and need to be referenced first (disqualifying answers 2 and 4).
+> > to use a list to slice them, not a range (disqualifying answers 1 and 4). At the point 
+> > where we select the countries using `.loc`, we have not yet transposed the dataset 
+> > (using `.T`), so the country names are still indexes, not column labels, and therefore 
+> > need to be referenced first (ie in the first set of square brackets), (disqualifying 
+> > answers 2 and 4).
 > {: .solution}
 {: .challenge}
 
