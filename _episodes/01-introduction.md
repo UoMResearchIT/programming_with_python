@@ -54,13 +54,13 @@ Lists and strings both contain multiple indexed values (in the case of strings t
 We can also select whole sections of lists and strings, not just single elements. Using the same variable `animal`, containing the string `penguin`, as above, which of these options will print the last 2 characters for us? (Note that there is more an one correct answer)
 1. `print(animal[5:])`
 2. `print(animal[6:])`
-2. `print(animal[6:7])`
-3. `print(animal[5:7])`
-4. `print(animal[-2:])`
-5. `print(animal[:-2])`
+3. `print(animal[6:7])`
+4. `print(animal[5:7])`
+5. `print(animal[-2:])`
+6. `print(animal[:-2])`
 
 > ## Solution
-> Answers 1, 3, and 4 are correct
+> Answers 1, 4, and 5 are correct
 {: .solution}
 
 
