@@ -22,7 +22,7 @@ keypoints:
 
 Virtual environments are a useful tool for isolating and managing the software packages you use. Doing this enables you to track the packages you use for your work (enabling you to create reproducable environments, so that others can also use your code). It also allows you to use packages which might have conflicting requirements (or even different versions of the same package) without the hassle of haveing to install and uninstall these each time.
 
-Python has a built in tools for managing virtual environments ([venv](https://docs.python.org/3/tutorial/venv.html)) and packages (pip). However we will not cover these tools today, While venv and pip are very useful for managing pure python packages, they are not very flexible when we want to use packages which are built on other languages (or perhaps do not use python at all). Another tool, conda, has been built to extend their functionality to cover these mixed-language packages, for a wide range of computing platforms, and it is this which we will cover today.
+Python has a built in tools for managing virtual environments ([venv](https://docs.python.org/3/tutorial/venv.html)) and packages (pip). However we will not cover these tools today. While venv and pip are very useful for managing pure python packages, they are not very flexible when we want to use packages which are built on other languages (or perhaps do not use python at all). Another tool, conda, has been built to extend their functionality to cover these mixed-language packages, for a wide range of computing platforms, and it is this which we will cover today. More details on the differences between conda and pip are given in this [summary](https://www.anaconda.com/blog/understanding-conda-and-pip).
 
 The lesson below is not conducted using a python interpreter, but instead using the unix shell. When you are asked to type in code below, please do this in a terminal window and not in this browser.
 
@@ -180,6 +180,39 @@ conda search perl*
 {: .language-bash}
 
 
+
+## What if conda hasn't been properly configured?
+
+If `conda activate <ENV>` gives you this error then you need to initialise your conda setup:
+~~~
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+~~~
+{: .output}
+
+To do this you will need to enter the command:
+~~~
+conda init
+~~~
+{: .language-bash}
+This will modify your personal shell configuration (in file `/home/mbessdl2/.bashrc` or similar). You will have to close that shell, and then open another shell for the changes to take effect.
+
+
+
 ## Creating Environments
 
 As the range and variety of software used increases, it is becoming very common for users require a number of different software programs for their work which need access to different versions of the same software library. In addition there could be conflicts between the operating system requirements (as these tend to change slowly, and be built on reliable software libraries) and the latest version of the required software package. Usually, installing all this software on the same system would be very difficult, but if we use virtual environments to separate these programs and their dependencies, then the task becomes a lot more simple.
@@ -195,7 +228,17 @@ conda env list
 base                  *  /Users/mbessdl2/anaconda3
 ~~~
 {: .output}
-This shows you the environments you have installed, and the path where they are installed. In addition the `*` indicates which environment you currently have loaded. 
+This shows you the environments you have installed, and the path where they are installed. In addition the `*` indicates which environment you currently have loaded. In the example above, anaconda is installed by the user, and is only accessible by that particular user. However, if anaconda has been installed by the administrator of that computer then you might something like:
+~~~
+# conda environments:
+#
+base                  *  /opt/apps/anaconda
+~~~
+{: .output}
+In this case the anaconda install will be accessible for all users, however no-one other than the administrator will be able to install new packages into the `base` environment.
+
+
+
 
 You can list the packages you have installed in your current environment using:
 ~~~
@@ -248,9 +291,9 @@ conda list myenv
 {: .output}
 
 
-We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example, we will create the `myenv` environment again, this time installing the [spyder](https://www.spyder-ide.org/) IDE package:
+We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example, we will create the `myenv` environment again, this time installing the [spyder](https://www.spyder-ide.org/) IDE package, as well as the [pandas](https://pandas.pydata.org/) package, which we will need later:
 ~~~
-conda create --name myenv spyder
+conda create --name myenv spyder pandas
 ~~~
 {: .language-bash}
 This will warn you that you are about to overwrite another environment, press `[y]` to continue. Conda will then workout the new environment setup (which can take a little time), and then will list the packages which are to be downloaded, and those which will be installed, before asking if you wish to continue. Press `[y]` to continue, and then check that the environment exists and that the packages you expect are installed using `conda env list`, and `conda list myenv` as before.
@@ -282,15 +325,59 @@ which spyder
 ~~~
 {: .output}
 
-> ##
-> If your shell has not been configured to use conda activate, then you might be able to
-> use this command to activate the environment:
+
+> ## What if conda hasn't been configured yet?
+>
+> It is possible that `conda activate <ENV>` will give you this error:
 > ~~~
-> . activate myenv
+> CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+> To initialize your shell, run
+>
+>     $ conda init <SHELL_NAME>
+>
+> Currently supported shells are:
+>   - bash
+>   - fish
+>   - tcsh
+>   - xonsh
+>   - zsh
+>   - powershell
+>
+> See 'conda init --help' for more information and options.
+>
+> IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+> ~~~
+> {: .output}
+> This will often happen on computers with a central installation of anaconda, where the
+> anaconda environment management tools will have not been initialised (as many users will
+> not need them). This can be corrected by following the instructions in the error
+> message (assuming that your current shell is `bash`, change the last word if not):
+> ~~~
+> conda init bash
 > ~~~
 > {: .language-bash}
->
+> This will modify your personal shell configuration (in file `/home/mbessdl2/.bashrc` or
+> similar). You will have to close that shell, and then open another shell for the
+> changes to take effect.
 {: .callout}
+
+## Installing Software into an Existing Environment
+
+During your work you often will find that you need to add new software packages to your environment. For example, we will need the `astropy` and `pint` packages for the units and quantities lesson, and so we should add these now.
+
+To install these packages (into the current environment we are in) we can use:
+~~~
+conda install astropy pint
+~~~
+{: .language-bash}
+
+If you are installing packages into an environment which is not active (or if you want to be certain that you are installing into the correct environment), you can add `-n <ENV>`:
+~~~
+conda install -n myenv astropy pint
+~~~
+{: .language-bash}
+
+Uninstalling software can be carried out in a similar manner, using `conda uninstall`.
 
 
 ## Recording and Reproducing Environment Setups
@@ -305,19 +392,20 @@ conda list --export
 ~~~
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
-# platform: osx-64
-_anaconda_depends=2019.03=py37_0
-_ipyw_jlab_nb_ext_conf=0.1.0=py37_0
+# platform: linux-64
+_libgcc_mutex=0.1=conda_forge
+_openmp_mutex=4.5=1_gnu
 alabaster=0.7.12=py_0
-anaconda=custom=py37_1
-anaconda-client=1.7.2=py_0
-anaconda-navigator=1.9.12=py37_0
-anaconda-project=0.8.3=py_0
+alsa-lib=1.2.3=h516909a_0
+appdirs=1.4.4=pyh9f0ad1d_0
+argh=0.26.2=pyh9f0ad1d_1002
+arrow=1.1.0=pyhd8ed1ab_1
+astroid=2.5.6=py39hf3d152e_0
 ...
-zip=3.0=h1de35cc_1
-zipp=3.1.0=py_0
-zlib=1.2.11=h0b31af3_1006
-zstd=1.4.4=he7fca8b_1
+zeromq=4.3.4=h9c3ff4c_0
+zipp=3.4.1=pyhd8ed1ab_0
+zlib=1.2.11=h516909a_1010
+zstd=1.4.9=ha95c52a_0
 ~~~
 {: .output}
 This contains similar information to the standard `conda list` command, but in a machine readable formation. The output information can be saved to a text file using `conda list --export > envfile.txt`, which can then be used to recreate the environment elsewhere, using the command `conda create --name <env> --file <this file>`. However, it should be noted that this will be restricted to the operating system it is created on, and the channel information is not recorded in this output - so if you have used more than just the default and conda-forge channels it may be difficult for someone else to replicate.
@@ -330,25 +418,26 @@ conda env export
 ~~~
 {: .language-bash}
 ~~~
-name: base
+name: myenv
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - _anaconda_depends=2019.03=py37_0
-  - _ipyw_jlab_nb_ext_conf=0.1.0=py37_0
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=1_gnu
   - alabaster=0.7.12=py_0
-  - anaconda=custom=py37_1
-  - anaconda-client=1.7.2=py_0
-  - anaconda-navigator=1.9.12=py37_0
-  - anaconda-project=0.8.3=py_0
-...
-  - zip=3.0=h1de35cc_1
-  - zipp=3.1.0=py_0
-  - zlib=1.2.11=h0b31af3_1006
-  - zstd=1.4.4=he7fca8b_1
-prefix: /Users/mbessdl2/anaconda3
+  - alsa-lib=1.2.3=h516909a_0
+  - appdirs=1.4.4=pyh9f0ad1d_0
+  - argh=0.26.2=pyh9f0ad1d_1002
+  - arrow=1.1.0=pyhd8ed1ab_1
+  - astroid=2.5.6=py39hf3d152e_0
+ ...
+  - zeromq=4.3.4=h9c3ff4c_0
+  - zipp=3.4.1=pyhd8ed1ab_0
+  - zlib=1.2.11=h516909a_1010
+  - zstd=1.4.9=ha95c52a_0
+prefix: /home/mbessdl2/.conda/envs/myenv
 ~~~
 {: .output}
 This will present the same information, but in the more readable [YAML](https://yaml.org/) format, and it will also include the channel information in the output. This information can be saved as a text file as before, and used to create a new environment using the command `conda env create`. However it is still operating system specific information.
@@ -359,31 +448,17 @@ conda env export --from-history
 ~~~
 {: .language-bash}
 ~~~
-name: base
+name: myenv
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - conda
-  - python=3.7
-  - conda-env
-  - conda-build
-  - conda-verify
-  - _ipyw_jlab_nb_ext_conf
-  - anaconda
-  - anaconda-navigator==1.9.12
-  - navigator-updater
-  - start_jupyter_cm
-  - nb_conda
-  - conda-smithy
-  - conda-forge-pinning
-  - wget
-  - zip
-  - unzip
-  - tree
-  - svn
-prefix: /Users/mbessdl2/anaconda3
+  - pandas
+  - spyder
+  - astropy
+  - pint
+prefix: /home/mbessdl2/.conda/envs/myenv
 ~~~
 {: .output}
 This builds a list of only the packages that you explicitly requested to be installed in that environment. Where you have specified a particular version of a package, then this will be recorded, but otherwise the version number will be unconstrained. If you wish to constrain the version of a package (for example, if a certain feature you use has been removed in more recent versions of the package), then you will need to edit this information to specify that (using the information given by the standard `conda list` command).
