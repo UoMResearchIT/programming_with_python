@@ -23,7 +23,7 @@ keypoints:
 
 One of the most common problems in physics and the development of physical models is related to the conversion and management of physical units. Without clear management of physical units, and ensuring that the information passed between different parts of the system is consistent, accidents such as the [Mars Climate Orbiter probe crash](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter) can occur.
 
-In this lesson we will look at one of the available libraries in python for helping the avoidance of such problems. This is the [units](https://docs.astropy.org/en/stable/units/index.html) module in the [astropy](https://docs.astropy.org/en/stable/index.html) library.
+In this lesson we will look at one of the available libraries in python for helping to avoid such problems. This is the [units](https://docs.astropy.org/en/stable/units/index.html) module in the [astropy](https://docs.astropy.org/en/stable/index.html) library.
 
 ## Installing a new python library
 
@@ -38,7 +38,7 @@ The `units` module can then be imported in your scripts using:
 from astropy import units as u
 ~~~
 {: .language-python}
-Importing as `u` is not necessary, but is a common shorthand for the module, and so we'll use it below.
+Importing as `u` is not necessary, but it is a common shorthand for this module, and so we'll use it below.
 
 ## Basics
 
@@ -119,7 +119,7 @@ print(speed.decompose())
 > print(speed.decompose(bases=['km','s']))
 > ~~~
 > {: .language-python}
-> Note that the order of the values in the list passed to `bases` parameter doesn't matter. However, the base units you chose must be either one of the original units used, or a standard base units. This function cannot be used to convert from km to cm, for example. Instead it is useful where you only want to reduce select units within the object.
+> Note that the order of the values in the list passed to `bases` parameter doesn't matter. However, the base units you choose must be either one of the original units used, or a standard base unit. This function cannot be used to convert from km to cm, for example. Instead it is useful where you only want to reduce select units within the object.
 {: .callout}
 
 You can change the base system using functions such as `si` (to change to the default SI units) and `cgs` (to change to centimetre-grams-seconds units):
