@@ -252,14 +252,6 @@ We are going to learn some commands that deal with images. Since most scientific
 
 In the data directory you should find a file called `502nmos.fits`.
 
-We can verify that the file is indeed here:
-
-~~~
-cd data
-ls *.fits
-~~~
-{: .language-python}
-
 We need to use the astropy I/O library fits to open this file. This can be imported as:
 ~~~
 import astropy.io.fits as pyfits
@@ -405,7 +397,7 @@ Rather than applying the filtering of our data within the plotting tool, we can 
 
 We begin with creating a mask to remove values greater than 25:
 ~~~
-immasked - np.ma.masked_greater(imdata, 25)
+immasked = np.ma.masked_greater(imdata, 25)
 ~~~
 {: .language-python}
 
