@@ -1,4 +1,4 @@
-# FIXME Lesson title
+# Programming with Python
 
 [![Create a Slack Account with us](https://img.shields.io/badge/Create_Slack_Account-The_Carpentries-071159.svg)](https://swc-slack-invite.herokuapp.com/)
 
@@ -63,7 +63,6 @@ Current maintainers of this lesson are
 
 * Douglas Lowe
 * Ann Gledson
-
 
 ## Authors
 
