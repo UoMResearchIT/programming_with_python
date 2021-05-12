@@ -168,50 +168,6 @@ Note that the build string now starts with `pyXX`, where `XX` indicates the vers
 
 
 
-~~~
-conda search 'spyder>=4.2'
-~~~
-{: .language-bash}
-
-
-~~~
-conda search perl*
-~~~
-{: .language-bash}
-
-
-
-## What if conda hasn't been properly configured?
-
-If `conda activate <ENV>` gives you this error then you need to initialise your conda setup:
-~~~
-CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
-To initialize your shell, run
-
-    $ conda init <SHELL_NAME>
-
-Currently supported shells are:
-  - bash
-  - fish
-  - tcsh
-  - xonsh
-  - zsh
-  - powershell
-
-See 'conda init --help' for more information and options.
-
-IMPORTANT: You may need to close and restart your shell after running 'conda init'.
-~~~
-{: .output}
-
-To do this you will need to enter the command:
-~~~
-conda init
-~~~
-{: .language-bash}
-This will modify your personal shell configuration (in file `/home/mbessdl2/.bashrc` or similar). You will have to close that shell, and then open another shell for the changes to take effect.
-
-
 
 ## Creating Environments
 
