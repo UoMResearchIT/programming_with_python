@@ -13,11 +13,15 @@ objectives:
 - "Learn how to activate / deactivate conda environments"
 - "Learn how to record the setup of a conda environment"
 keypoints:
-- "`conda install`"
-- "`conda env create`"
-- "`conda activate`"
-- "`conda deactivate`"
-- "`conda save`"
+- "conda virtual environments are useful for installing programs with differing requirements"
+- "`conda config --add channels <channel>` adds a new channel to your list of sources"
+- "`conda search <package>` will find all available versions of a package in your list of sources"
+- "`conda create -n <env> <package(s)>` can be used to create a virtual environment from a list of packages"
+- "`conda install -n <env> <pacakge(s)>` installs packages in a pre-existing environment"
+- "`conda activate <env>` activates the named environment, giving access to the software installed there"
+- "`conda deactivate` deactivates the current environment"
+- "`conda env export --from-history > <file.yml>` creates a portable record of your current environment"
+- "`conda env create --file <file.yml> <env>` creates a new environment from an environment file"
 ---
 
 Virtual environments are a useful tool for isolating and managing the software packages you use. Doing this enables you to track the packages you use for your work (enabling you to create reproducable environments, so that others can also use your code). It also allows you to use packages which might have conflicting requirements (or even different versions of the same package) without the hassle of haveing to install and uninstall these each time.
