@@ -170,7 +170,7 @@ Reminder: the Gaussian function is defined by:
 > > ## challenge 1:
 > > ~~~
 > > def gauss(x, mu=0, sigma=1):
-> >     return (1. / (sigma * np.sqrt(2 * np.pi)) *
+> >     return (1. / (np.sqrt(2 * np.pi * sigma ** 2)) *
 > >             np.exp( - (x - mu) ** 2 / (2 * sigma ** 2)))
 > > ~~~
 > > {: .language-python}
