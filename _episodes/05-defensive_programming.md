@@ -127,7 +127,7 @@ except TypeError as err:
     print('But our code does not crash anymore')
     print('The run-time error is:', err)
 else:
-    print('1/val = ', val)
+    print('1/val = ', 1/val)
 finally:
     print('release memory')
     del(val)
