@@ -443,7 +443,7 @@ Masked median: 6.725283622741699
 > measurements being taken, and some is also likely due to sampling
 > errors). So we would like to remove these erroneous data from our plot too.
 > 1. Create a new masked array (`immasked2`) where the lower limit is set to zero (you can use the `np.ma.masked_less_equal` function to do this).
-> 2. Update the immasked2.mask to apply both masks (you can use the logical or `|` operator to do this). Then plot the new asked data array.
+> 2. Update the immasked2.mask to apply both masks (you can use the logical OR operator `|` to do this). Then plot the new asked data array.
 >
 > > ## New mask
 > > ~~~
