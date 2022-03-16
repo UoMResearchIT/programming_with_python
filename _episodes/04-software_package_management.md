@@ -120,7 +120,7 @@ gromacs                       2021.1      hd895feb_0  bioconda
 {: .output}
 This shows you the name of the package you searched for, then the version of the software, build number (which can increment up as bugs are fixed, see above for version 2020.5), and the channel that the package is in.
 
-If we know the version of the softare we are interested in we can narrow this search down. For example, if we are only interested in gromacs versions greater than `2020` we can use:
+If we know the version of the software we are interested in we can narrow this search down. For example, if we are only interested in gromacs versions greater than `2020` we can use:
 ~~~
 conda search 'gromacs>=2020'
 ~~~

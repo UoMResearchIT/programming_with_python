@@ -33,7 +33,7 @@ We are going to learn some of the basic commands not seen in the first course. W
 
 The *array* is the central object of NumPy. It is a multi-dimensional object which contains numerical data. The main difference between NumPy arrays and Python lists is the set of operations that can be performed on them. In this lesson we are going to learn a little more about how to use this fundamental library to do any numerical analysis in Python.
 
-NumPy arrays are good for arrays of numerical data where each dimension is of a consistent size. Where you want to work with heterogeneous data and performance is not a problem, working with Python lists and dictionaries is easier than working with uneven datasets in NumPy. Similarly, while NumPy arrays do technically support having different data types in different columns, it is awkward to do and breaks a lot of the useful NumPy methods. It is best to use libraries for the specific purpose for which they are designed, so any sort of tabular data is better handled with something like Pandas. 
+NumPy arrays are good for arrays of numerical data where each dimension is of a consistent size. Where you want to work with heterogeneous data and performance is not a problem, working with Python lists and dictionaries is easier than working with uneven datasets in NumPy. Similarly, while NumPy arrays do technically support having different data types in different columns, it is awkward to do and breaks a lot of the useful NumPy methods. It is best to use libraries for the specific purpose for which they are designed, so any sort of tabular data is better handled with something like Pandas.
 
 To start, we are going to import the two libraries `numpy` and `matplotlib` that will be used in this episode.
 
@@ -63,6 +63,7 @@ print(f'odds_np is type {type(odds_np)}, and contains {odds_np}')
 ~~~
 odds_np is type <class 'numpy.ndarray'>, and contains [1 3 5 7 9]
 ~~~
+{: .output}
 Note that we did not need to convert the output of `np.arange`, as we did for the output of `range`, because `np.arange` returns a NumPy array directly, rather than returning a range object.
 
 > ## NumPy Array Addition
