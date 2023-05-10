@@ -49,7 +49,6 @@ conda config --show channels
 This will (likely) list the the following:
 ~~~
 channels:
-  - conda-forge
   - defaults
 ~~~
 {: .output}
@@ -57,6 +56,19 @@ channels:
 The channel order is important for determining priority when installing packages. Those from channels higher in the list will be given priority over those lower in the list. After this the newer versions of a package are given priority over older versions of a package (and then build numbers, for a given version). The order in which priority is determined can be changed, we won't cover this today, but more information can be found in the [conda managing channels](https://docs.conda.io/projects/conda/en/4.6.1/user-guide/tasks/manage-channels.html) documentation.
 
 To add a channel we can use:
+~~~
+conda config --add channels conda-forge
+conda config --show channels
+~~~
+{: .language-bash}
+~~~
+channels:
+  - conda-forge
+  - defaults
+~~~
+{: .output}
+
+We can repeat this to add as many channels as we need:
 ~~~
 conda config --add channels bioconda
 conda config --show channels
@@ -122,7 +134,7 @@ This shows you the name of the package you searched for, then the version of the
 
 If we know the version of the software we are interested in we can narrow this search down. For example, if we are only interested in gromacs versions greater than `2020` we can use:
 ~~~
-conda search 'gromacs>=2020'
+conda search "gromacs>=2020"
 ~~~
 {: .language-bash}
 ~~~
@@ -142,7 +154,7 @@ Note that we've put the search string in quotations, in order to ensure it is pa
 
 We can also use wildcards in the version string. For example, if we wish to find all numpy packages with version 1.20:
 ~~~
-conda search 'numpy==1.20.*'
+conda search "numpy==1.20.*"
 ~~~
 {: .language-bash}
 ~~~
@@ -251,9 +263,9 @@ conda list myenv
 {: .output}
 
 
-We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example, we will create the `myenv` environment again, this time installing the [spyder](https://www.spyder-ide.org/) IDE package, as well as the [pandas](https://pandas.pydata.org/) package, which we will need later:
+We can also specify the packages we want to install when creating an environment. When this is done conda will work out all the necessary supporting packages for you. For example, we will create the `myenv` environment again, this time installing the [spyder](https://www.spyder-ide.org/) IDE package, as well as the [pandas](https://pandas.pydata.org/) and [matplotlib](https://matplotlib.org/) packages, which we will need later:
 ~~~
-conda create --name myenv spyder pandas
+conda create --name myenv spyder pandas matplotlib
 ~~~
 {: .language-bash}
 This will warn you that you are about to overwrite another environment, press `[y]` to continue. Conda will then workout the new environment setup (which can take a little time), and then will list the packages which are to be downloaded, and those which will be installed, before asking if you wish to continue. Press `[y]` to continue, and then check that the environment exists and that the packages you expect are installed using `conda env list`, and `conda list myenv` as before.
