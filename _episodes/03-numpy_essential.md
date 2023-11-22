@@ -113,7 +113,7 @@ print(arr.dtype)
 arr = arr.astype(float)
 print(arr.dtype)
 ~~~
-{: .language-bash}
+{: .language-python}
 ~~~
 int64
 float64
