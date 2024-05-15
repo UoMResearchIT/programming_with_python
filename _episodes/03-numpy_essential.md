@@ -93,7 +93,7 @@ arr = np.arange(1, 18, 2)
 arr_2d = arr.reshape((3, 3))
 print(f'arr has shape {arr.shape}, and contains:')
 print(arr)
-print(f'arr_2d has shape {arr2d.shape}, and contains:')
+print(f'arr_2d has shape {arr_2d.shape}, and contains:')
 print(arr_2d)
 ~~~
 {: .language-python}
