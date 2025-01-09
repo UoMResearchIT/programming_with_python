@@ -39,10 +39,10 @@ To start, we are going to import the two libraries `numpy` and `matplotlib` that
 
 ~~~
 import numpy as np
-import matplotlib.pylab as plt
+import matplotlib.pyplot as plt
 ~~~
 {: .language-python}
-Here we import the libraries using a common shorthand for them, `np` for `numpy`, and `plt` for `matplotlib.pylab`. You will encounter this in many python scripts using these libraries, and we will continue to use these shorthands below.
+Here we import the libraries using a common shorthand for them, `np` for `numpy`, and `plt` for `matplotlib.pyplot`. You will encounter this in many python scripts using these libraries, and we will continue to use these shorthands below.
 
 If we wanted to create a *list* of odd numbers in base Python we would use `range` and `list`:
 ~~~
