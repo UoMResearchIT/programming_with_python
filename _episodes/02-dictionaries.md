@@ -343,20 +343,27 @@ True
 ## JSON files
 
 Because JSON files are such a widely used format, python has a built in package for working with JSON, called `json`:
+This package provides the method `json.load()` to read JSON data from a file and and convert it to a python dictionary:
+
 ~~~
 import json
-import glob
 
-filenames = sorted(glob.glob('*.json'))
-
-j_objects = {}
-for filename in filenames:
-    with open(filename) as f:
-        j_objects[filename] = json.loads(f.read())
+with open("example.json", "r") as f:
+	data = json.load(f)
 ~~~
 {: .language-python}
-
-The `f.read` method reads the file as a single string, which the `json.loads()` method then turns into a dictionary, following the JSON standard.
+ 
+The closely related method `json.loads()` (s for "string") reads a string containing JSON and turns it into a Python dictionary:
+~~~
+json_string = '{"numbers": [1, 2, 3]}'
+d = json.loads(json_string)
+d['numbers']
+~~~
+{: .language-python}
+~~~
+[1, 2, 3]
+~~~
+{: .output}
 
 
 ## HTTP requests
