@@ -2,53 +2,43 @@
 title: Setup
 ---
 
-FIXME: Setup instructions live in this document. Please specify the tools and
-the data sets the Learner needs to have installed.
+## Overview
 
-## Data Sets
+This lesson is designed to be run on a personal computer.
+All of the software and data used in this lesson are freely available online,
+and instructions on how to obtain them are provided below.
 
-<!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
--->
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+## Install Python
 
-## Software Setup
+In this lesson, we will be using Python 3 with some of its most popular scientific libraries.
+Although one can install a plain-vanilla Python and all required libraries by hand,
+we recommend installing [Anaconda][anaconda-website],
+a Python distribution that comes with everything we need for the lesson.
+Detailed installation instructions for various operating systems can be found
+on The Carpentries [template website for workshops][anaconda-instructions]
+and in [Anaconda documentation][anaconda-install].
 
-::::::::::::::::::::::::::::::::::::::: discussion
+## Obtain lesson materials
 
-### Details
+1. Download [python-intermediate-data.zip](./data/python-intermediate-data.zip)
+2. Create a folder called `swc-python` on your Desktop.
+3. Move downloaded file to `swc-python`.
+4. Unzip the file.
 
-Setup for different systems can be presented in dropdown menus via a `solution`
-tag. They will join to this discussion block, so you can give a general overview
-of the software used in this lesson here and fill out the individual operating
-systems (and potentially add more, e.g. online setup) in the solutions blocks.
+You should see a folder called `data` in the `swc-python` directory on your
+Desktop.
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::
+## Launch Python Interface
 
-:::::::::::::::: solution
-
-### Windows
-
-Use PuTTY
-
-:::::::::::::::::::::::::
-
-:::::::::::::::: solution
-
-### MacOS
-
-Use Terminal.app
-
-:::::::::::::::::::::::::
+We recommend following the instructions in the setup page for [Programming for Python][prog_python_course]
+for launching the python interface.
 
 
-:::::::::::::::: solution
 
-### Linux
+[anaconda-website]: https://www.anaconda.com/
+[anaconda-instructions]: https://carpentries.github.io/workshop-template/#python
+[anaconda-install]: https://docs.anaconda.com/anaconda/install
+[prog_python_course]: https://swcarpentry.github.io/python-novice-inflammation/setup.html
 
-Use Terminal
 
-:::::::::::::::::::::::::
 

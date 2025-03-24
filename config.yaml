@@ -17,23 +17,23 @@ carpentry: 'incubator'
 # carpentry_description: "Custom Carpentry"
 
 # Overall title for pages.
-title: 'Lesson Title'
+title: 'Programming with Python'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: '2025-03-13'
+created: 
 
 # Comma-separated list of keywords for the lesson
 keywords: 'software, data, lesson, The Carpentries'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
-life_cycle: 'pre-alpha'
+life_cycle: 'beta'
 
 # License of the lesson materials (recommended CC-BY 4.0)
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://example.com/FIXME-template-source'
+source: 'https://github.com/fishtree-attempt/convert_lesson_2/'
 
 # Default branch of your lesson
 branch: 'main'
@@ -65,7 +65,13 @@ contact: 'team@carpentries.org'
 
 # Order of episodes in your lesson
 episodes: 
-- introduction.Rmd
+- 01-introduction.md
+- 02-dictionaries.md
+- 03-numpy_essential.md
+- 04-software_package_management.md
+- 05-defensive_programming.md
+- 06-units_and_quantities.md
+- 07-pandas_essential.md
 
 # Information for Learners
 learners: 
@@ -82,3 +88,8 @@ profiles:
 # sandpaper and varnish versions) should live
 
 
+carpentry_description: Lesson Description
+url: https://preview.carpentries.org/convert_lesson_2
+analytics: carpentries
+lang: en
+workbench-beta: yes
