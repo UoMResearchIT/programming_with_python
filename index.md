@@ -14,7 +14,7 @@ This course is designed to introduce you to some of the different libraries and 
 
 <!-- this is an html comment -->
 
-{% comment %} This is a comment in Liquid {% endcomment %}
+<!-- {% comment %} This is a comment in Liquid {% endcomment %}: It doesn't support in Workbench-->
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq
 
