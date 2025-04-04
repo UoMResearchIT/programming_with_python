@@ -20,6 +20,8 @@ This course follows on from the python introduction course. To ensure that we ar
 
 ## Variables and Lists
 
+::::::::::::::::::::::::::::::::::::: challenge
+
 ### 1\. Assigning a value to a variable
 
 We wish to store the string `Cat` as a value in the variable `animal`, which of these lines of code will do this for us?
@@ -31,12 +33,13 @@ We wish to store the string `Cat` as a value in the variable `animal`, which of 
 
 :::::::::::::::  solution
 
-## Solution
-
 Answer 1 is correct
 
-
 :::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 2\. Assigning values to a list
 
@@ -48,12 +51,13 @@ We wish to create a list of values, which of these lines of code is valid to do 
 
 :::::::::::::::  solution
 
-## Solution
-
 Answer 1 is correct
 
-
 :::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 3a. Indexing characters in a string
 
@@ -65,12 +69,13 @@ Lists and strings both contain multiple indexed values (in the case of strings t
 
 :::::::::::::::  solution
 
-## Solution
-
 Answer 1 is correct
 
-
 :::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 3b. Indexing characters in a string (slicing)
 
@@ -85,14 +90,15 @@ We can also select whole sections of lists and strings, not just single elements
 
 :::::::::::::::  solution
 
-## Solution
-
 Answers 1, 4, and 5 are correct
-
 
 :::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Loops
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 4\. Constructing a `for` loop
 
@@ -100,16 +106,18 @@ Please write a simple `for` loop which will print out each of the characters in 
 
 :::::::::::::::  solution
 
-## Solution
-
-```bash
+```python
 for char in animal:
     print(char)
 ```
 
 :::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Software Modules
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 5\. Loading new functions
 
@@ -121,14 +129,15 @@ We want to use the functions in the `numpy` library in our code. How do we open 
 
 :::::::::::::::  solution
 
-## Solution
-
 Answer 1 is correct
-
 
 :::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 ## If statements and conditionals
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 6\. Conditionals
 
@@ -142,12 +151,13 @@ Which of these conditional tests returns a `True` result?
 
 :::::::::::::::  solution
 
-## Solution
-
 Answers 1, 2, and 3 return `True` results. 4 returns `False`. 5 raises an Error.
 
-
 :::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: challenge
 
 ### 7\. If statements
 
@@ -173,13 +183,11 @@ else:
 
 :::::::::::::::  solution
 
-## Solution
-
 `B`. Both `4 <= 5` and `4 < 5` would return a `True` result, but the `if` statement is exited as soon as the `True` result is returned.
-
 
 :::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
