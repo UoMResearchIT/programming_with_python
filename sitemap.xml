@@ -1,87 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/01-introduction.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/02-dictionaries.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/02-dictionaries.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/03-numpy_essential.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/03-numpy_essential.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/04-software_package_management.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/04-software_package_management.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/05-defensive_programming.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/05-defensive_programming.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/06-units_and_quantities.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/06-units_and_quantities.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/07-pandas_essential.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/07-pandas_essential.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/404.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/404.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/CODE_OF_CONDUCT.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/LICENSE.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/discuss.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/aio.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/index.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/discuss.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/01-introduction.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/images.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/02-dictionaries.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/index.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/03-numpy_essential.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/01-introduction.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/04-software_package_management.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/02-dictionaries.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/05-defensive_programming.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/03-numpy_essential.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/06-units_and_quantities.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/04-software_package_management.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/07-pandas_essential.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/05-defensive_programming.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/404.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/06-units_and_quantities.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/CODE_OF_CONDUCT.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/07-pandas_essential.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/LICENSE.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/404.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/discuss.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/index.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/profiles.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/aio.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/instructor/reference.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/discuss.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/profiles.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/images.html</loc>
   </url>
   <url>
-    <loc>https://preview.carpentries.org/convert_lesson_2/reference.html</loc>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/key-points.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/profiles.html</loc>
+  </url>
+  <url>
+    <loc>https://uomresearchit.github.io/programming_with_python/reference.html</loc>
   </url>
 </urlset>
