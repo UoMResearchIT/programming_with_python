@@ -23,7 +23,7 @@ title: 'Programming with Python'
 created: 
 
 # Comma-separated list of keywords for the lesson
-keywords: 'software, data, lesson, The Carpentries'
+keywords: 'python, software, data, lesson, The Carpentries'
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -33,13 +33,13 @@ life_cycle: 'beta'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/fishtree-attempt/convert_lesson_2/'
+source: 'https://github.com/UoMResearchIT/programming_with_python'
 
 # Default branch of your lesson
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org'
+contact: 'douglas.lowe@manchester.ac.uk'
 
 # Navigation ------------------------------------------------
 #
@@ -88,8 +88,8 @@ profiles:
 # sandpaper and varnish versions) should live
 
 
-carpentry_description: Lesson Description
-url: https://preview.carpentries.org/convert_lesson_2
+carpentry_description: Programming with Python
+url: https://uomresearchit.github.io/programming_with_python/
 analytics: carpentries
 lang: en
 workbench-beta: yes
