@@ -1,0 +1,61 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata-3.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "mainEntity": {
+        "@id": "operations_workflow.cwl"
+      },
+      "hasPart": [
+        {
+          "@id": "operations_workflow.cwl"
+        }
+      ],
+      "author": [
+
+      ],
+      "provider": [
+        {
+          "@id": "#project-1"
+        }
+      ],
+      "license": "Apache-2.0",
+      "sdPublisher": {
+        "@id": "#person-1"
+      },
+      "sdDatePublished": "2020-06-01 00:00:00 +0000"
+    },
+    {
+      "@id": "#cwl",
+      "@type": "ComputerLanguage",
+      "name": "CommonWorkflowLanguage",
+      "identifier": {
+        "@id": "https://www.commonwl.org/"
+      },
+      "url": {
+        "@id": "https://www.commonwl.org//"
+      }
+    },
+    {
+      "@id": "#project-1",
+      "@type": "Organization",
+      "name": "Science Workflows"
+    },
+    {
+      "@id": "#person-1",
+      "@type": "Person",
+      "name": "David Jones"
+    }
+  ]
+}

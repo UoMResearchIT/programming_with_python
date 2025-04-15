@@ -1,0 +1,64 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata-4.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "mainEntity": {
+        "@id": "tracking_workflow.ga"
+      },
+      "hasPart": [
+        {
+          "@id": "tracking_workflow.ga"
+        },
+        {
+          "@id": "object_tracking_pipeline.png"
+        }
+      ],
+      "author": [
+
+      ],
+      "provider": [
+        {
+          "@id": "#project-1"
+        }
+      ],
+      "license": "Apache-2.0",
+      "sdPublisher": {
+        "@id": "#person-1"
+      },
+      "sdDatePublished": "2020-11-15 00:00:00 +0000"
+    },
+    {
+      "@id": "#galaxy",
+      "@type": "ComputerLanguage",
+      "name": "Galaxy",
+      "identifier": {
+        "@id": "https://galaxyproject.org/"
+      },
+      "url": {
+        "@id": "https://galaxyproject.org/"
+      }
+    },
+    {
+      "@id": "#project-1",
+      "@type": "Organization",
+      "name": "Science Workflows"
+    },
+    {
+      "@id": "#person-1",
+      "@type": "Person",
+      "name": "Alice Smith"
+    }
+  ]
+}
