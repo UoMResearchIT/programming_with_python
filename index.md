@@ -28,5 +28,8 @@ All material in these lessons pertain to **Python** **3**.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+Link to the [slides presented at the beginning of the course](https://uomresearchit.github.io/Programming-With-Python/documents/programming_with_python_in_person_slides.pdf).
+
+
 
 
