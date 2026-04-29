@@ -378,7 +378,10 @@ angles = np.arange(181) * u.deg
 ```
 
 ```python
+import matplotlib.pyplot as plt
+
 plt.plot(angles, np.sin(angles))
+plt.show()
 ```
 
 ![](fig/sin_curve_deg.png){alt='Plot of sin curve for degrees between 0-180'}
