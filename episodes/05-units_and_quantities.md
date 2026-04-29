@@ -104,7 +104,7 @@ This enables the use of arithmetic operations when quantities have compatible un
 
 ```python
 distance_start = 10 * u.mm
-distance_end = 23 * u.km
+distance_end = 20 * u.km
 length = distance_end - distance_start
 print(length)
 ```
