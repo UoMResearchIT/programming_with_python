@@ -349,6 +349,8 @@ angle in degrees: 90.0; and in radians: 1.5707963267948966
 Now we can pass the angle directly to `np.sin` without having to convert directly to radians:
 
 ```python
+import numpy as np
+
 print(f'sin of 90 degrees is: {np.sin(angle)}')
 print(f'sin of pi/2 radians is: {np.sin(1.57079632)}')
 print(f'sin of 90 degrees is not: {np.sin(90)}')
