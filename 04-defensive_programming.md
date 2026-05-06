@@ -256,7 +256,7 @@ check_sign(val)
 ```
 
 ```output
-Value:  nan is a number.
+Value: nan is negative.
 ```
 
 However numpy does provide the `isnan()` function for testing if a value is NaN. Add an assertion test using this which will raise and error if the value is NaN.
