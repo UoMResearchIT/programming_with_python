@@ -2866,7 +2866,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-05-units_and_quantities"><p>Content from <a href="05-units_and_quantities.html">Units and Quantities</a></p>
 <hr>
-<p>Last updated on 2026-04-23 |
+<p>Last updated on 2026-05-06 |
 
         <a href="https://github.com/UoMResearchIT/programming_with_python/edit/main/episodes/05-units_and_quantities.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 0 minutes</p>
@@ -3018,7 +3018,7 @@ compatible units:</p>
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a>distance_start <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> u.mm</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a>distance_end <span class="op">=</span> <span class="dv">23</span> <span class="op">*</span> u.km</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1" aria-label="code-block-12-2"></a>distance_end <span class="op">=</span> <span class="dv">20</span> <span class="op">*</span> u.km</span>
 <span id="cb12-3"><a href="#cb12-3" tabindex="-1" aria-label="code-block-12-3"></a>length <span class="op">=</span> distance_end <span class="op">-</span> distance_start</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1" aria-label="code-block-12-4"></a><span class="bu">print</span>(length)</span></code></pre>
 </div>
@@ -3337,9 +3337,11 @@ having to convert directly to radians:</p>
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1" aria-label="code-block-41-1"></a><span class="bu">print</span>(<span class="ss">f'sin of 90 degrees is: </span><span class="sc">{</span>np<span class="sc">.</span>sin(angle)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1" aria-label="code-block-41-2"></a><span class="bu">print</span>(<span class="ss">f'sin of pi/2 radians is: </span><span class="sc">{</span>np<span class="sc">.</span>sin(<span class="fl">1.57079632</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb41-3"><a href="#cb41-3" tabindex="-1" aria-label="code-block-41-3"></a><span class="bu">print</span>(<span class="ss">f'sin of 90 degrees is not: </span><span class="sc">{</span>np<span class="sc">.</span>sin(<span class="dv">90</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" tabindex="-1" aria-label="code-block-41-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1" aria-label="code-block-41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1" aria-label="code-block-41-3"></a><span class="bu">print</span>(<span class="ss">f'sin of 90 degrees is: </span><span class="sc">{</span>np<span class="sc">.</span>sin(angle)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1" aria-label="code-block-41-4"></a><span class="bu">print</span>(<span class="ss">f'sin of pi/2 radians is: </span><span class="sc">{</span>np<span class="sc">.</span>sin(<span class="fl">1.57079632</span>)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1" aria-label="code-block-41-5"></a><span class="bu">print</span>(<span class="ss">f'sin of 90 degrees is not: </span><span class="sc">{</span>np<span class="sc">.</span>sin(<span class="dv">90</span>)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3370,7 +3372,10 @@ plot the sin of these:</p>
 <div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1" aria-label="code-block-45-1"></a>plt.plot(angles, np.sin(angles))</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" tabindex="-1" aria-label="code-block-45-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1" aria-label="code-block-45-2"></a></span>
+<span id="cb45-3"><a href="#cb45-3" tabindex="-1" aria-label="code-block-45-3"></a>plt.plot(angles, np.sin(angles))</span>
+<span id="cb45-4"><a href="#cb45-4" tabindex="-1" aria-label="code-block-45-4"></a>plt.show()</span></code></pre>
 </div>
 <p><img src="../fig/sin_curve_deg.png" alt="Plot of sin curve for degrees between 0-180" class="figure"> Note that the units
 for the x-axis are properly presented. This can be done for any angular
@@ -3910,7 +3915,7 @@ correct:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The correct answer is 1. We have to pass the new column labels
 explicitly back to the array columns, otherwise all we do is replace the
@@ -3956,7 +3961,7 @@ will be using is:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>The correct answer is 3. The two countries are not adjacent in the
 dataset, so we need to use a list to slice them, not a range
